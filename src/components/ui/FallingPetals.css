@@ -1,0 +1,45 @@
+.petals {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 2; /* au-dessus du fond, sous le contenu */
+}
+
+.petal {
+  position: absolute;
+  top: -8%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M12 2C9 6 4 8 4 13c0 4 3.6 7 8 7s8-3 8-7c0-5-5-7-8-11z' fill='%23f7b9c4'/%3E%3Cpath d='M12 3.5C10 7 6 8.6 6 12.8' stroke='%23e58aa0' stroke-width='0.6' fill='none' opacity='0.6'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  /* deux animations combinées : chute verticale + balancement horizontal */
+  animation-name: petal-fall, petal-sway;
+  animation-timing-function: linear, ease-in-out;
+  animation-iteration-count: infinite, infinite;
+  will-change: transform;
+}
+
+@keyframes petal-fall {
+  0% {
+    transform: translateY(-10vh) rotate(0deg);
+  }
+  100% {
+    transform: translateY(110vh) rotate(540deg);
+  }
+}
+
+@keyframes petal-sway {
+  0%,
+  100% {
+    margin-left: -22px;
+  }
+  50% {
+    margin-left: 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .petals {
+    display: none; /* on coupe l'animation pour les utilisateurs sensibles */
+  }
+}

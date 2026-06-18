@@ -57,14 +57,16 @@
 
 .video-text-title {
   font-family: 'Inter', system-ui, sans-serif;
-  font-size: clamp(4rem, 15vw, 15rem);
+  /* Bornée par la largeur ET la hauteur (min(...vw, ...vh)) pour que le titre
+     tienne toujours dans son cadre, quel que soit le format de l'écran. */
+  font-size: clamp(3rem, min(13vw, 17vh), 12rem);
   font-weight: 900;
   text-transform: uppercase;
   margin: 0;
-  line-height: 0.82;
+  line-height: 0.86;
   text-align: center;
   letter-spacing: -0.04em;
-  transform: scale(1, 1.18);
+  transform: scale(1, 1.12);
   transform-origin: center center;
   background: none;
   color: #000;

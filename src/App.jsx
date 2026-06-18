@@ -1,257 +1,538 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useMemo, useState } from 'react';
+import { NavLink, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import './index.css';
-import createGlobe from 'cobe';
-import { VideoText } from './components/ui/VideoText';
+import { BoutonOrganic } from './components/ui/BoutonOrganic';
+import { FallingPetals } from './components/ui/FallingPetals';
+import {
+  CITY_COORDS,
+  COUNTRY_FR,
+  COUNTRY_HEX,
+  COUNTRY_ORDER,
+  DAILY_PHOTO_TIPS,
+  PLACE_TYPES,
+  PLACES,
+  TRANSPORT_LEGS,
+} from './data/tripData';
 
-const PHASE1_MS = 1000; // durée de l'expansion plein écran de la vidéo
-
-// Marqueurs du globe. clickable => déclenche la transition au clic (pays du voyage).
-const TRIP_MARKERS = [
-  { location: [48.8566, 2.3522], size: 0.05, clickable: false }, // Paris (départ)
-  { location: [37.5665, 126.9780], size: 0.08, clickable: true }, // Séoul
-  { location: [35.6762, 139.6503], size: 0.08, clickable: true }, // Tokyo
-  { location: [34.6937, 135.5023], size: 0.06, clickable: true }, // Osaka
-  { location: [35.0116, 135.7681], size: 0.06, clickable: true }, // Kyoto
-  { location: [13.7563, 100.5018], size: 0.08, clickable: true }, // Bangkok
+const NAV_ITEMS = [
+  { to: '/itineraire', label: 'Itinéraire' },
+  { to: '/journee', label: 'Journée' },
+  { to: '/photos', label: 'Photo' },
+  { to: '/restaurants', label: 'Resto' },
+  { to: '/guide', label: 'Guide' },
 ];
 
-const THETA = 0.2;
-const DEG = Math.PI / 180;
-const MARKER_RADIUS = 0.8; // ee (0.8) + markerElevation (0) — d'après la source de cobe
-
-/**
- * Reproduit la projection interne de cobe (fonctions U + O décodées du shader) :
- * convertit [lat, lng] en coordonnées écran normalisées [0,1] et indique si le
- * point est sur la face avant (visible) du globe.
- */
-function projectMarker([lat, lng], phi, theta, aspect) {
-  const latR = lat * DEG;
-  const a = lng * DEG - Math.PI;
-  const o = Math.cos(latR);
-  const tx = -o * Math.cos(a) * MARKER_RADIUS;
-  const ty = Math.sin(latR) * MARKER_RADIUS;
-  const tz = o * Math.sin(a) * MARKER_RADIUS;
-
-  const ct = Math.cos(theta), st = Math.sin(theta);
-  const cp = Math.cos(phi), sp = Math.sin(phi);
-
-  const c = cp * tx + sp * tz;
-  const s = sp * st * tx + ct * ty - cp * st * tz;
-  const depth = -sp * ct * tx + st * ty + cp * ct * tz;
-
-  const x01 = (c / aspect + 1) / 2;
-  const y01 = (-s + 1) / 2;
-  const hidden = depth >= 0 || c * c + s * s >= 0.64;
-  return { x01, y01, visible: !hidden };
-}
+const TRANSITION_MS = 900;
+const TRIP_START = '2026-09-30';
+const TRIP_END = '2026-11-22';
+const CONTENT_ROUTES = ['/itineraire', '/journee', '/photos', '/restaurants', '/guide'];
 
 function App() {
-  const canvasRef = useRef();
-  const videoBgRef = useRef();
-  const phiRef = useRef(2.0);
-  const leavingRef = useRef(false);
+  return (
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      {CONTENT_ROUTES.map((path) => (
+        <Route key={path} path={path} element={<ProgramShell />} />
+      ))}
+    </Routes>
+  );
+}
+
+function HomePage() {
+  const navigate = useNavigate();
   const [leaving, setLeaving] = useState(false);
 
-  // ---- Phase 1 : la vidéo derrière les lettres s'agrandit en plein écran ----
-  const startLeaving = useCallback(() => {
-    if (leavingRef.current) return;
-    leavingRef.current = true;
+  function enterProgram(target) {
+    if (leaving) return;
     setLeaving(true);
-
-    try {
-      // Indique à program.html d'afficher le voile vidéo d'arrivée (handoff fluide).
-      sessionStorage.setItem('voyage_from_home', '1');
-    } catch (err) {
-      /* sessionStorage indisponible : la navigation reste fonctionnelle */
-    }
-
-    const vt = videoBgRef.current;
-    if (vt) {
-      vt.style.animation = 'none'; // coupe l'animation d'entrée (fadeBlur) pour libérer le transform
-      const r = vt.getBoundingClientRect();
-      Object.assign(vt.style, {
-        position: 'fixed',
-        margin: '0',
-        transform: 'none',
-        top: `${r.top}px`,
-        left: `${r.left}px`,
-        width: `${r.width}px`,
-        height: `${r.height}px`,
-        zIndex: '60',
-        transition: 'none',
-      });
-      vt.classList.add('is-leaving'); // déclenche le fondu du masque blanc => vidéo plein cadre
-
-      requestAnimationFrame(() =>
-        requestAnimationFrame(() => {
-          const ease = 'cubic-bezier(0.16, 1, 0.3, 1)';
-          vt.style.transition = `top ${PHASE1_MS}ms ${ease}, left ${PHASE1_MS}ms ${ease}, width ${PHASE1_MS}ms ${ease}, height ${PHASE1_MS}ms ${ease}`;
-          vt.style.top = '0px';
-          vt.style.left = '0px';
-          vt.style.width = '100vw';
-          vt.style.height = '100dvh';
-        })
-      );
-    }
-
-    window.setTimeout(() => {
-      window.location.href = '/program.html';
-    }, PHASE1_MS);
-  }, []);
-
-  // Référence stable pour appeler startLeaving depuis l'effet (deps vides).
-  const startLeavingRef = useRef(startLeaving);
-  startLeavingRef.current = startLeaving;
-
-  const onButtonClick = (e) => {
-    if (e.metaKey || e.ctrlKey || e.button === 1) return; // laisse l'ouverture en nouvel onglet
-    e.preventDefault();
-    startLeavingRef.current();
-  };
-
-  useEffect(() => {
-    let phi = 2.0;
-    let targetPhi = 2.0;
-    const theta = THETA;
-    let isDragging = false;
-    let startX = 0;
-    let startY = 0;
-    let startPhi = 0;
-    let movedDist = 0;
-
-    const canvas = canvasRef.current;
-
-    // Renvoie le marqueur cliquable visible sous (clientX, clientY), s'il y en a un.
-    const markerAt = (clientX, clientY) => {
-      const rect = canvas.getBoundingClientRect();
-      if (!rect.width) return null;
-      const aspect = rect.width / rect.height;
-      const threshold = Math.min(44, Math.max(22, rect.width * 0.07));
-      let best = null;
-      let bestDist = Infinity;
-      for (const m of TRIP_MARKERS) {
-        if (!m.clickable) continue;
-        const p = projectMarker(m.location, phi, theta, aspect);
-        if (!p.visible) continue;
-        const px = rect.left + p.x01 * rect.width;
-        const py = rect.top + p.y01 * rect.height;
-        const d = Math.hypot(clientX - px, clientY - py);
-        if (d < threshold && d < bestDist) {
-          bestDist = d;
-          best = m;
-        }
-      }
-      return best;
-    };
-
-    const onPointerDown = (e) => {
-      isDragging = true;
-      startX = e.clientX;
-      startY = e.clientY;
-      startPhi = targetPhi;
-      movedDist = 0;
-      canvas.style.cursor = 'grabbing';
-    };
-
-    const stopDragging = () => {
-      isDragging = false;
-      canvas.style.cursor = 'grab';
-    };
-
-    const onPointerUp = (e) => {
-      const wasDragging = isDragging;
-      stopDragging();
-      // Un vrai clic (peu de mouvement) sur un pays déclenche la transition.
-      if (wasDragging && movedDist < 6 && markerAt(e.clientX, e.clientY)) {
-        startLeavingRef.current();
-      }
-    };
-
-    const onPointerMove = (e) => {
-      if (isDragging) {
-        const delta = e.clientX - startX;
-        movedDist = Math.max(movedDist, Math.hypot(e.clientX - startX, e.clientY - startY));
-        targetPhi = startPhi + delta * 0.005;
-      } else {
-        // Affordance : curseur "pointer" au survol d'un pays cliquable.
-        canvas.style.cursor = markerAt(e.clientX, e.clientY) ? 'pointer' : 'grab';
-      }
-    };
-
-    canvas.addEventListener('pointerdown', onPointerDown);
-    canvas.addEventListener('pointerup', onPointerUp);
-    canvas.addEventListener('pointerout', stopDragging);
-    canvas.addEventListener('pointermove', onPointerMove);
-
-    const globe = createGlobe(canvas, {
-      devicePixelRatio: Math.min(window.devicePixelRatio || 1, 2),
-      width: 800,
-      height: 800,
-      phi: phi,
-      theta: theta,
-      dark: 0, /* 0 => sphère claire + continents foncés (lisible sur fond blanc) */
-      diffuse: 1.1,
-      mapSamples: 16000,
-      mapBrightness: 2.4, /* Contraste des continents : ↑ = continents plus foncés */
-      baseColor: [0.74, 0.74, 0.78], /* Gris clair de la sphère : ↑ = plus clair */
-      markerColor: [0.9, 0.16, 0.24], /* Marqueurs rouges (dessinés au-dessus du globe) */
-      glowColor: [1, 1, 1], /* Halo blanc => bord doux qui se fond dans le fond blanc */
-      markers: TRIP_MARKERS,
-      onRender: (state) => {
-        const dpr = Math.min(window.devicePixelRatio || 1, 2);
-        state.width = canvas.clientWidth * dpr;
-        state.height = canvas.clientHeight * dpr;
-
-        if (!isDragging) {
-          targetPhi += 0.002;
-        }
-
-        phi += (targetPhi - phi) * 0.08;
-        phiRef.current = phi;
-
-        state.phi = phi;
-        state.theta = theta;
-      }
-    });
-
-    return () => {
-      globe.destroy();
-      canvas.removeEventListener('pointerdown', onPointerDown);
-      canvas.removeEventListener('pointerup', onPointerUp);
-      canvas.removeEventListener('pointerout', stopDragging);
-      canvas.removeEventListener('pointermove', onPointerMove);
-    };
-  }, []);
+    window.setTimeout(() => navigate(target), TRANSITION_MS);
+  }
 
   return (
-    <div className="hero-wrapper">
-      {/* Arrière-plan typographique vidéo */}
-      <div className="video-text-background" ref={videoBgRef}>
-        <VideoText src="/japan.mp4">
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <span>VOYAGE</span>
-            <span>ASIE</span>
+    <main className={`cover ${leaving ? 'cover--leaving' : ''}`}>
+      <div className="panorama panorama--cover" />
+      <div className="cover__veil" />
+      <FallingPetals count={16} />
+
+      <section className="cover__content" aria-label="Page de garde">
+        <h1 className="cover__title">Voyage en Asie</h1>
+
+        <div className="cover__haiku">
+          <p>Monts enneigés</p>
+          <p>Cerisiers qui fleurissent</p>
+          <p>Voyage éternel.</p>
+        </div>
+
+        <div className="cover__cta">
+          <BoutonOrganic variant="voyage" type="button" onClick={() => enterProgram('/journee')}>
+            Découvrir
+            <br />
+            le voyage
+          </BoutonOrganic>
+          <BoutonOrganic
+            variant="photos"
+            type="button"
+            petals={false}
+            onClick={() => enterProgram('/photos')}
+          >
+            Galerie photos
+          </BoutonOrganic>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+function ProgramShell() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [country, setCountry] = useState('all');
+  const [query, setQuery] = useState('');
+  const isItinerary = location.pathname === '/itineraire';
+
+  const places = useMemo(() => {
+    return PLACES.filter((place) => {
+      if (country !== 'all' && place.country !== country) return false;
+      if (!query.trim()) return true;
+      const haystack = [place.name, place.city, place.desc, place.tips, ...(place.tags || [])]
+        .join(' ')
+        .toLowerCase();
+      return haystack.includes(query.trim().toLowerCase());
+    });
+  }, [country, query]);
+
+  function renderPage() {
+    if (location.pathname === '/itineraire') return <ItineraryPage places={places} />;
+    if (location.pathname === '/photos') return <PhotosPage places={places} />;
+    if (location.pathname === '/restaurants') return <RestaurantsPage places={places} />;
+    if (location.pathname === '/guide') return <GuidePage places={places} />;
+    return <DayPage places={places} />;
+  }
+
+  return (
+    <main className="program-shell">
+      <div className="panorama panorama--program" />
+      <div className="program-shell__shade" />
+
+      <nav className="program-nav" aria-label="Navigation du voyage">
+        <button className="program-nav__home" type="button" onClick={() => navigate('/')}>
+          Voyage en Asie
+        </button>
+        <div className="program-nav__links">
+          {NAV_ITEMS.map((item) => (
+            <NavLink
+              key={item.to}
+              to={item.to}
+              className={({ isActive }) =>
+                isActive ? 'program-nav__link program-nav__link--active' : 'program-nav__link'
+              }
+            >
+              {item.label}
+            </NavLink>
+          ))}
+        </div>
+      </nav>
+
+      {isItinerary ? (
+        <section className="program-frame program-frame--native" aria-label="Itinéraire du voyage">
+          <iframe
+            title="Itinéraire interactif"
+            src="/program.html?tab=itineraire&embed=1"
+            className="native-program-frame"
+          />
+        </section>
+      ) : (
+      <section className="program-frame program-frame--react" aria-label="Programme du voyage">
+        <div className="app-toolbar">
+          <div className="app-search">
+            <span>Recherche</span>
+            <input
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="Lieu, ville, tag..."
+            />
           </div>
-        </VideoText>
-      </div>
+          <div className="country-filter" aria-label="Filtre pays">
+            <button className={country === 'all' ? 'active' : ''} onClick={() => setCountry('all')} type="button">
+              Tous
+            </button>
+            {COUNTRY_ORDER.map((key) => (
+              <button
+                key={key}
+                className={country === key ? 'active' : ''}
+                onClick={() => setCountry(key)}
+                type="button"
+                style={{ '--country': COUNTRY_HEX[key] }}
+              >
+                {COUNTRY_FR[key]}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="program-content">{renderPage()}</div>
+      </section>
+      )}
+    </main>
+  );
+}
 
-      {/* Globe interactif 3D — cliquer un pays du voyage lance aussi la transition */}
-      <div className="globe-container">
-        <canvas ref={canvasRef} id="globe"></canvas>
-      </div>
+function ItineraryPage({ places }) {
+  const placesByCountry = groupBy(places, (place) => place.country);
+  const cityCount = new Set(places.map((place) => place.city)).size;
+  const photoCount = places.filter((place) => place.isPhotoSpot).length;
 
-      {/* Contenu principal et call to action */}
-      <div className={`hero-content ${leaving ? 'is-hidden' : ''}`}>
-        <div className="badge">Septembre — Novembre 2026</div>
-        <p className="destinations">Corée du Sud · Japon · Thaïlande</p>
+  return (
+    <div className="page-grid itinerary-page">
+      <PageHeader
+        eyebrow="Itinéraire"
+        title="Le voyage complet"
+        subtitle={`${formatDateLong(TRIP_START)} - ${formatDateLong(TRIP_END)}`}
+      />
+      <StatsStrip
+        items={[
+          ['Lieux', places.length],
+          ['Villes', cityCount],
+          ['Photos', photoCount],
+          ['Trajets', TRANSPORT_LEGS.length],
+        ]}
+      />
+      <section className="map-panel">
+        <div className="map-panel__canvas">
+          {Object.entries(CITY_COORDS).map(([city, coord]) => (
+            <span
+              key={city}
+              className="map-pin"
+              style={{
+                left: `${normalize(coord[1], 100, 140)}%`,
+                top: `${normalize(coord[0], 10, 40)}%`,
+              }}
+              title={city}
+            >
+              {city}
+            </span>
+          ))}
+        </div>
+      </section>
+      <section className="stack">
+        {COUNTRY_ORDER.map((country) => {
+          const countryPlaces = placesByCountry[country] || [];
+          if (!countryPlaces.length) return null;
+          const byCity = groupBy(countryPlaces, (place) => place.city);
+          return (
+            <article className="country-section" key={country}>
+              <h2>
+                <span style={{ background: COUNTRY_HEX[country] }} />
+                {COUNTRY_FR[country]}
+              </h2>
+              {Object.entries(byCity).map(([city, cityPlaces]) => (
+                <div className="city-block" key={city}>
+                  <h3>{city}</h3>
+                  <div className="compact-list">
+                    {sortByDate(cityPlaces).map((place) => (
+                      <PlaceRow key={place.id} place={place} />
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </article>
+          );
+        })}
+      </section>
+    </div>
+  );
+}
 
-        <a href="/program.html" className="magic-btn" onClick={onButtonClick}>
-          <span className="magic-btn-text">Découvrir le programme</span>
-          <span className="magic-btn-glow"></span>
-        </a>
+function DayPage({ places }) {
+  const dates = useMemo(() => getTripDates(PLACES), []);
+  const [selectedDate, setSelectedDate] = useState(dates[0]);
+  const dayPlaces = sortByTime(places.filter((place) => place.date === selectedDate));
+  const activities = dayPlaces.filter((place) => place.type !== 'hotel' && place.type !== 'transport');
+  const hotel = dayPlaces.find((place) => place.type === 'hotel');
+  const restaurants = activities.filter((place) => place.type === 'restaurant');
+  const photoCount = activities.filter((place) => place.isPhotoSpot).length;
+
+  return (
+    <div className="day-layout">
+      <PageHeader
+        eyebrow={`Jour ${dayNumber(selectedDate)}`}
+        title={formatDateLong(selectedDate)}
+        subtitle={activities[0]?.city || hotel?.city || 'Voyage Asie 2026'}
+      />
+      <DateRail dates={dates} selectedDate={selectedDate} onSelect={setSelectedDate} />
+      {DAILY_PHOTO_TIPS[selectedDate] && (
+        <InfoBanner icon="📷" label="Tip photo du jour">
+          {DAILY_PHOTO_TIPS[selectedDate]}
+        </InfoBanner>
+      )}
+      {hotel && <HotelCard hotel={hotel} />}
+      <InfoBanner icon="🍜" label="Restaurants du jour">
+        {restaurants.length ? restaurants.map((resto) => resto.name).join(', ') : 'Aucun restaurant planifié.'}
+      </InfoBanner>
+      <StatsStrip
+        items={[
+          ['Arrêts', activities.length],
+          ['Photo spots', photoCount],
+          ['Ville', activities[0]?.city || hotel?.city || '—'],
+          ['Pays', COUNTRY_FR[activities[0]?.country || hotel?.country] || '—'],
+        ]}
+      />
+      <section className="period-grid">
+        {[
+          ['Matin', activities.filter((place) => place.time && place.time < '12:00')],
+          ['Après-midi', activities.filter((place) => place.time && place.time >= '12:00' && place.time < '18:00')],
+          ['Soir', activities.filter((place) => place.time && place.time >= '18:00')],
+          ['Sans heure', activities.filter((place) => !place.time)],
+        ].map(([label, periodPlaces]) => (
+          <article className="period-card" key={label}>
+            <h2>{label}</h2>
+            {periodPlaces.length ? (
+              periodPlaces.map((place) => <PlaceRow key={place.id} place={place} />)
+            ) : (
+              <p>Aucune activité prévue.</p>
+            )}
+          </article>
+        ))}
+      </section>
+      <section className="stack">
+        <SectionTitle>Programme de la journée</SectionTitle>
+        {activities.length ? activities.map((place) => <PlaceCard key={place.id} place={place} />) : <EmptyState text="Aucun lieu pour cette journée." />}
+      </section>
+    </div>
+  );
+}
+
+function PhotosPage({ places }) {
+  const spots = sortByDate(places.filter((place) => place.isPhotoSpot));
+  const byDate = groupBy(spots, (place) => place.date || 'Sans date');
+
+  return (
+    <div className="page-grid">
+      <PageHeader eyebrow="Photo" title="Spots photo" subtitle={`${spots.length} lieux repérés`} />
+      <section className="stack">
+        {spots.length ? (
+          Object.entries(byDate).map(([date, datePlaces]) => (
+            <article className="date-section" key={date}>
+              <h2>{date === 'Sans date' ? date : formatDateLong(date)}</h2>
+              {DAILY_PHOTO_TIPS[date] && <p className="date-tip">{DAILY_PHOTO_TIPS[date]}</p>}
+              <div className="card-grid">
+                {datePlaces.map((place) => (
+                  <PlaceCard key={place.id} place={place} />
+                ))}
+              </div>
+            </article>
+          ))
+        ) : (
+          <EmptyState text="Aucun spot photo ne correspond aux filtres." />
+        )}
+      </section>
+    </div>
+  );
+}
+
+function RestaurantsPage({ places }) {
+  const restaurants = sortByDate(places.filter((place) => place.type === 'restaurant'));
+  const byDate = groupBy(restaurants, (place) => place.date || 'Sans date');
+
+  return (
+    <div className="page-grid">
+      <PageHeader eyebrow="Resto" title="Restaurants" subtitle={`${restaurants.length} adresses planifiées`} />
+      <section className="stack">
+        {restaurants.length ? (
+          Object.entries(byDate).map(([date, datePlaces]) => (
+            <article className="date-section" key={date}>
+              <h2>{date === 'Sans date' ? date : formatDateLong(date)}</h2>
+              <div className="card-grid">
+                {datePlaces.map((place) => (
+                  <PlaceCard key={place.id} place={place} />
+                ))}
+              </div>
+            </article>
+          ))
+        ) : (
+          <EmptyState text="Aucun restaurant ne correspond aux filtres." />
+        )}
+      </section>
+    </div>
+  );
+}
+
+function GuidePage({ places }) {
+  const byDate = groupBy(sortByDate(places.filter((place) => place.date)), (place) => place.date);
+
+  return (
+    <div className="page-grid guide-page">
+      <PageHeader eyebrow="Guide" title="Guide détaillé" subtitle="Vue chronologique du voyage" />
+      <section className="stack">
+        {Object.entries(byDate).map(([date, datePlaces]) => (
+          <article className="guide-day" key={date}>
+            <header>
+              <span>J{dayNumber(date)}</span>
+              <h2>{formatDateLong(date)}</h2>
+            </header>
+            <div className="compact-list">
+              {sortByTime(datePlaces).map((place) => (
+                <PlaceRow key={place.id} place={place} />
+              ))}
+            </div>
+          </article>
+        ))}
+      </section>
+    </div>
+  );
+}
+
+function PageHeader({ eyebrow, title, subtitle }) {
+  return (
+    <header className="page-header">
+      <p>{eyebrow}</p>
+      <h1>{title}</h1>
+      <span>{subtitle}</span>
+    </header>
+  );
+}
+
+function StatsStrip({ items }) {
+  return (
+    <section className="stats-grid">
+      {items.map(([label, value]) => (
+        <div className="stat-card" key={label}>
+          <strong>{value}</strong>
+          <span>{label}</span>
+        </div>
+      ))}
+    </section>
+  );
+}
+
+function DateRail({ dates, selectedDate, onSelect }) {
+  return (
+    <div className="date-rail">
+      {dates.map((date) => (
+        <button key={date} className={date === selectedDate ? 'active' : ''} onClick={() => onSelect(date)} type="button">
+          <span>J{dayNumber(date)}</span>
+          {formatDateShort(date)}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function InfoBanner({ icon, label, children }) {
+  return (
+    <div className="info-banner">
+      <span>{icon}</span>
+      <div>
+        <strong>{label}</strong>
+        <p>{children}</p>
       </div>
     </div>
   );
+}
+
+function HotelCard({ hotel }) {
+  return (
+    <article className="hotel-card">
+      <span>↪</span>
+      <div>
+        <p>Hébergement du soir</p>
+        <h2>{hotel.name}</h2>
+        <small>{hotel.city}</small>
+      </div>
+    </article>
+  );
+}
+
+function SectionTitle({ children }) {
+  return <h2 className="section-title">{children}</h2>;
+}
+
+function PlaceCard({ place }) {
+  const type = PLACE_TYPES[place.type] || PLACE_TYPES.default;
+  return (
+    <article className="place-card">
+      <div className="place-card__icon" style={{ background: colorForPlace(place) }}>
+        {type.emoji}
+      </div>
+      <div>
+        <div className="place-card__meta">
+          {place.time || '—'} · {place.city}
+        </div>
+        <h3>{place.name}</h3>
+        <p>{place.desc || type.label}</p>
+        {place.tips && <small>{place.tips}</small>}
+      </div>
+    </article>
+  );
+}
+
+function PlaceRow({ place }) {
+  const type = PLACE_TYPES[place.type] || PLACE_TYPES.default;
+  return (
+    <div className="place-row">
+      <span style={{ background: colorForPlace(place) }}>{type.emoji}</span>
+      <div>
+        <strong>{place.name}</strong>
+        <small>
+          {place.time || formatDateShort(place.date)} · {place.city}
+          {place.rating ? ` · ★ ${place.rating}` : ''}
+        </small>
+      </div>
+    </div>
+  );
+}
+
+function EmptyState({ text }) {
+  return <div className="empty-state">{text}</div>;
+}
+
+function groupBy(items, getKey) {
+  return items.reduce((acc, item) => {
+    const key = getKey(item) || 'Autre';
+    acc[key] ||= [];
+    acc[key].push(item);
+    return acc;
+  }, {});
+}
+
+function sortByDate(items) {
+  return [...items].sort((a, b) => `${a.date || ''}${a.time || ''}`.localeCompare(`${b.date || ''}${b.time || ''}`));
+}
+
+function sortByTime(items) {
+  return [...items].sort((a, b) => (a.time || '99:99').localeCompare(b.time || '99:99'));
+}
+
+function getTripDates(items) {
+  return [...new Set(items.map((place) => place.date).filter(Boolean))].sort();
+}
+
+function formatDateShort(date) {
+  if (!date) return '—';
+  return new Date(`${date}T00:00:00`).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' });
+}
+
+function formatDateLong(date) {
+  if (!date) return 'Sans date';
+  return new Date(`${date}T00:00:00`).toLocaleDateString('fr-FR', {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+}
+
+function dayNumber(date) {
+  const start = new Date(`${TRIP_START}T00:00:00`);
+  const current = new Date(`${date}T00:00:00`);
+  return Math.round((current - start) / 86400000) + 1;
+}
+
+function colorForPlace(place) {
+  return COUNTRY_HEX[place.country] || '#b07a44';
+}
+
+function normalize(value, min, max) {
+  return Math.max(4, Math.min(96, ((value - min) / (max - min)) * 100));
 }
 
 export default App;
