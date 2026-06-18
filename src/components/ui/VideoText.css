@@ -1,0 +1,83 @@
+.video-text-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+/* 1. Fond de secours : aurora animée — fonctionne toujours, même hors-ligne.
+   C'est ce qui remplit les lettres tant que la vidéo n'est pas prête / absente. */
+.video-text-fallback {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(60% 80% at 20% 20%, #ff6b35 0%, transparent 60%),
+    radial-gradient(55% 75% at 80% 25%, #e91e63 0%, transparent 60%),
+    radial-gradient(70% 90% at 50% 90%, #00bcd4 0%, transparent 65%),
+    radial-gradient(80% 80% at 70% 70%, #6a3df0 0%, transparent 60%),
+    linear-gradient(120deg, #2b0a4a, #c2185b 50%, #ff8a3d);
+  background-size: 200% 200%;
+  filter: saturate(1.15);
+  animation: auroraShift 16s ease-in-out infinite alternate;
+}
+
+/* 2. Vidéo : recouvre l'aurora quand elle est prête. Apparition en fondu.
+   data-ready="false" (onError) => on la masque et l'aurora reprend la main. */
+.video-text-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.video-text-video[data-ready='true'] {
+  opacity: 1;
+}
+
+/* 3. Masque blanc + texte. mix-blend-mode: screen =>
+   le NOIR du texte devient transparent (révèle la vidéo / l'aurora),
+   le BLANC du fond reste blanc. */
+.video-text-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  color: #000;
+  mix-blend-mode: screen;
+  z-index: 2;
+}
+
+.video-text-title {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: clamp(4rem, 15vw, 15rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 0.82;
+  text-align: center;
+  letter-spacing: -0.04em;
+  transform: scale(1, 1.18);
+  transform-origin: center center;
+  background: none;
+  color: #000;
+  -webkit-text-fill-color: #000;
+  user-select: none;
+}
+
+@keyframes auroraShift {
+  0%   { background-position: 0% 0%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 50% 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .video-text-fallback { animation: none; }
+}
