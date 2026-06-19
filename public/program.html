@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,700;1,400&amp;family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -3429,9 +3430,78 @@
       display: none;
     }
 
+    /* ===== Habillage "peint" quand intégré dans le shell React =====
+       Redéfinit les variables du thème (prioritaire sur :root et
+       [data-theme="dark"]) pour une palette papier/or translucide, quel que
+       soit le thème clair/sombre de l'OS. */
+    html.embed-mode {
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'Crimson Text', Georgia, serif;
+
+      --bg-base: transparent;
+      --bg-elevated: rgba(255, 250, 240, 0.55);
+      --bg-card: rgba(255, 250, 240, 0.42);
+      --bg-muted: rgba(255, 250, 240, 0.30);
+      --bg-subtle: rgba(255, 250, 240, 0.24);
+      --bg-hover: rgba(43, 33, 23, 0.06);
+      --bg-active: rgba(43, 33, 23, 0.10);
+
+      --text-primary: #162930;
+      --text-secondary: #2f4640;
+      --text-tertiary: #5b6b63;
+      --text-muted: #7a7264;
+      --text-faint: #a59a86;
+      --text-on-accent: #2b2117;
+
+      --border-subtle: rgba(118, 86, 56, 0.18);
+      --border: rgba(212, 175, 55, 0.30);
+      --border-strong: rgba(176, 122, 68, 0.45);
+      --border-focus: #b07a44;
+
+      --accent: #b07a44;
+      --accent-hover: #c8994a;
+      --accent-soft: rgba(212, 175, 55, 0.16);
+      --accent-muted: rgba(212, 175, 55, 0.26);
+      --accent-text: #8a5a2c;
+
+      --korea: #b04a32;
+      --japan: #3e6550;
+      --thailand: #7e4a85;
+      --korea-soft: rgba(176, 74, 50, 0.14);
+      --japan-soft: rgba(62, 101, 80, 0.14);
+      --thailand-soft: rgba(126, 74, 133, 0.14);
+
+      --shadow-md: 0 14px 36px rgba(40, 30, 20, 0.18);
+      --shadow-lg: 0 18px 48px rgba(40, 30, 20, 0.22);
+      --shadow-xl: 0 24px 64px rgba(40, 30, 20, 0.26);
+    }
+
+    /* Flanc gauche : translucide + flouté (calque panorama auto-contenu,
+       indépendant du backdrop-filter cross-iframe). */
     html.embed-mode #sidebar {
+      background: transparent;
+      isolation: isolate;
+      border-right: 1px solid rgba(212, 175, 55, 0.30);
       border-top-left-radius: 8px;
       border-bottom-left-radius: 8px;
+    }
+    html.embed-mode #sidebar::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background: url('/fond-accueil-wide.png') left center / auto 120% no-repeat;
+      filter: blur(26px) saturate(1.05);
+      transform: scale(1.12);
+      pointer-events: none;
+    }
+    html.embed-mode #sidebar::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: rgba(255, 250, 240, 0.5);
+      pointer-events: none;
     }
 
   </style>

@@ -12,6 +12,7 @@ import {
   PLACE_TYPES,
   PLACES,
   TRANSPORT_LEGS,
+  TRANSPORT_MODES,
 } from './data/tripData';
 
 const NAV_ITEMS = [
@@ -89,6 +90,9 @@ function ProgramShell() {
   const [country, setCountry] = useState('all');
   const [query, setQuery] = useState('');
   const isItinerary = location.pathname === '/itineraire';
+  const routeIndex = Math.max(0, CONTENT_ROUTES.indexOf(location.pathname));
+  const panX =
+    CONTENT_ROUTES.length > 1 ? (routeIndex / (CONTENT_ROUTES.length - 1)) * 100 : 50;
 
   const places = useMemo(() => {
     return PLACES.filter((place) => {
@@ -111,13 +115,23 @@ function ProgramShell() {
 
   return (
     <main className="program-shell">
-      <div className="panorama panorama--program" />
+      <div
+        className="panorama panorama--program"
+        style={{ backgroundPosition: `${panX}% center` }}
+      />
       <div className="program-shell__shade" />
+      <FallingPetals count={12} />
 
       <nav className="program-nav" aria-label="Navigation du voyage">
-        <button className="program-nav__home" type="button" onClick={() => navigate('/')}>
+        <BoutonOrganic
+          variant="voyage"
+          type="button"
+          petals={false}
+          className="bouton-organic--compact program-nav__home"
+          onClick={() => navigate('/')}
+        >
           Voyage en Asie
-        </button>
+        </BoutonOrganic>
         <div className="program-nav__links">
           {NAV_ITEMS.map((item) => (
             <NavLink
@@ -213,6 +227,7 @@ function ItineraryPage({ places }) {
           ))}
         </div>
       </section>
+      <TransportSection />
       <section className="stack">
         {COUNTRY_ORDER.map((country) => {
           const countryPlaces = placesByCountry[country] || [];
@@ -450,16 +465,26 @@ function PlaceCard({ place }) {
   const type = PLACE_TYPES[place.type] || PLACE_TYPES.default;
   return (
     <article className="place-card">
-      <div className="place-card__icon" style={{ background: colorForPlace(place) }}>
-        {type.emoji}
-      </div>
+      {place.photo ? (
+        <img className="place-card__photo" src={place.photo} alt={place.name} loading="lazy" />
+      ) : (
+        <div className="place-card__icon" style={{ background: colorForPlace(place) }}>
+          {type.emoji}
+        </div>
+      )}
       <div>
         <div className="place-card__meta">
           {place.time || '—'} · {place.city}
+          {place.rating ? (
+            <span className="rating" title={place.ratingCount ? `${place.ratingCount} avis` : undefined}>
+              ★ {place.rating}
+            </span>
+          ) : null}
         </div>
         <h3>{place.name}</h3>
         <p>{place.desc || type.label}</p>
         {place.tips && <small>{place.tips}</small>}
+        <TagList tags={place.tags} />
       </div>
     </article>
   );
@@ -476,8 +501,52 @@ function PlaceRow({ place }) {
           {place.time || formatDateShort(place.date)} · {place.city}
           {place.rating ? ` · ★ ${place.rating}` : ''}
         </small>
+        <TagList tags={place.tags} limit={3} />
       </div>
     </div>
+  );
+}
+
+function TagList({ tags, limit }) {
+  if (!tags || !tags.length) return null;
+  const shown = limit ? tags.slice(0, limit) : tags;
+  return (
+    <div className="tag-list">
+      {shown.map((tag) => (
+        <span className="tag" key={tag}>
+          {tag}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function TransportSection() {
+  return (
+    <section className="transport-panel">
+      <SectionTitle>Trajets entre villes</SectionTitle>
+      <div className="transport-list">
+        {TRANSPORT_LEGS.map((leg, index) => {
+          const mode = TRANSPORT_MODES[leg.mode] || {};
+          return (
+            <div className="transport-leg" key={`${leg.date}-${index}`}>
+              <span className="transport-leg__mode" style={{ background: mode.color || 'var(--accent)' }}>
+                {mode.emoji || '→'}
+              </span>
+              <div className="transport-leg__body">
+                <strong>
+                  {leg.from} <span aria-hidden="true">→</span> {leg.to}
+                </strong>
+                <small>
+                  {formatDateShort(leg.date)} · {mode.label || leg.mode} · {leg.duration}
+                </small>
+                {leg.note && <p>{leg.note}</p>}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
   );
 }
 

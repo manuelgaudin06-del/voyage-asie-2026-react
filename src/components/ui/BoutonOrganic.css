@@ -115,3 +115,11 @@
     font-size: 1.12rem;
   }
 }
+
+/* Variante compacte — pour la barre de navigation des pages internes */
+.bouton-organic--compact {
+  padding: 10px 26px;
+  font-size: 0.95rem;
+  letter-spacing: 1.5px;
+  line-height: 1.1;
+}
