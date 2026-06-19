@@ -1937,6 +1937,30 @@ export const PLACE_TYPES = {
 
     // Fallback photos by category (Wikimedia Commons, libres de droits);
 
+export const TYPE_PHOTO_FALLBACK = {
+      temple:     'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Kinkaku-ji_the_Golden_Temple_in_Kyoto_overlooking_the_lake_-_high_rez.JPG/600px-Kinkaku-ji_the_Golden_Temple_in_Kyoto_overlooking_the_lake_-_high_rez.JPG',
+      palace:     'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Gyeongbokgung_Palace_-_Seoul%2C_South_Korea-2.jpg/600px-Gyeongbokgung_Palace_-_Seoul%2C_South_Korea-2.jpg',
+      viewpoint:  'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Tokyo_Tower_and_top_of_Zojoji.jpg/600px-Tokyo_Tower_and_top_of_Zojoji.jpg',
+      photo:      'https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Shibuya_Crossing_2014.jpg/600px-Shibuya_Crossing_2014.jpg',
+      restaurant: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Tonkotsu_ramen_by_jetalone_in_Hakata%2C_Fukuoka.jpg/600px-Tonkotsu_ramen_by_jetalone_in_Hakata%2C_Fukuoka.jpg',
+      market:     'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Tsukiji_Fish_Market_-_Tuna.jpg/600px-Tsukiji_Fish_Market_-_Tuna.jpg',
+      museum:     'https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/National_Museum_of_Korea_2.jpg/600px-National_Museum_of_Korea_2.jpg',
+      park:       'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Shinjuku_Gyoen_National_Garden_Tokyo_Japan_01s3.jpg/600px-Shinjuku_Gyoen_National_Garden_Tokyo_Japan_01s3.jpg',
+      nature:     'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Zhangjiajie-Parque-p3210796.jpg/600px-Zhangjiajie-Parque-p3210796.jpg',
+      beach:      'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Haeundae_Beach_-_panoramio.jpg/600px-Haeundae_Beach_-_panoramio.jpg',
+      nightlife:  'https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Golden_Gai_%28Shinjuku%29.jpg/600px-Golden_Gai_%28Shinjuku%29.jpg',
+      shopping:   'https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Harajuku_Takeshita_Street.jpg/600px-Harajuku_Takeshita_Street.jpg',
+      transport:  'https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/JRW_Series_N700_S11_Shin-Osaka_20200620.jpg/600px-JRW_Series_N700_S11_Shin-Osaka_20200620.jpg',
+      hotel:      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Ryokan_room_Wakamatsu.jpg/600px-Ryokan_room_Wakamatsu.jpg',
+      activity:   'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Cherry_blossoms_at_night%2C_Chidorigafuchi%2C_2014.jpg/600px-Cherry_blossoms_at_night%2C_Chidorigafuchi%2C_2014.jpg',
+      cultural:   'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Shirakawa-go_in_winter_2019.jpg/600px-Shirakawa-go_in_winter_2019.jpg',
+      waterfall:  'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Kegon_Falls_2007.jpg/600px-Kegon_Falls_2007.jpg',
+      onsen:      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Takaragawa_Onsen_2.jpg/600px-Takaragawa_Onsen_2.jpg',
+      default:    'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mount_Fuji_from_Hakone.jpg/600px-Mount_Fuji_from_Hakone.jpg'
+    };
+
+    // ===== MODES DE TRANSPORT =====;
+
 export const TRANSPORT_MODES = {
       plane:  { label: 'Vol',      emoji: '\u2708\uFE0F', color: '#3b6ea5' },
       train:  { label: 'Train',    emoji: '\uD83D\uDE84', color: '#3e6550' },

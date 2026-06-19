@@ -20,6 +20,7 @@ function extractConst(name) {
 const names = [
   'PLACES',
   'PLACE_TYPES',
+  'TYPE_PHOTO_FALLBACK',
   'TRANSPORT_MODES',
   'TRANSPORT_LEGS',
   'CITY_COORDS',

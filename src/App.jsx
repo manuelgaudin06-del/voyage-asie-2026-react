@@ -13,6 +13,7 @@ import {
   PLACES,
   TRANSPORT_LEGS,
   TRANSPORT_MODES,
+  TYPE_PHOTO_FALLBACK,
 } from './data/tripData';
 
 const NAV_ITEMS = [
@@ -258,25 +259,35 @@ function ItineraryPage({ places }) {
 }
 
 function DayPage({ places }) {
-  const dates = useMemo(() => getTripDates(PLACES), []);
+  const dates = useMemo(() => getTripDates(places), [places]);
   const [selectedDate, setSelectedDate] = useState(dates[0]);
-  const dayPlaces = sortByTime(places.filter((place) => place.date === selectedDate));
+  const activeDate = dates.includes(selectedDate) ? selectedDate : dates[0];
+  const dayPlaces = sortByTime(places.filter((place) => place.date === activeDate));
   const activities = dayPlaces.filter((place) => place.type !== 'hotel' && place.type !== 'transport');
   const hotel = dayPlaces.find((place) => place.type === 'hotel');
   const restaurants = activities.filter((place) => place.type === 'restaurant');
   const photoCount = activities.filter((place) => place.isPhotoSpot).length;
 
+  if (!dates.length) {
+    return (
+      <div className="day-layout">
+        <PageHeader eyebrow="Journée" title="Aucune journée" subtitle="Filtre trop restrictif" />
+        <EmptyState text="Aucun lieu ne correspond au filtre sélectionné." />
+      </div>
+    );
+  }
+
   return (
     <div className="day-layout">
       <PageHeader
-        eyebrow={`Jour ${dayNumber(selectedDate)}`}
-        title={formatDateLong(selectedDate)}
+        eyebrow={`Jour ${dayNumber(activeDate)}`}
+        title={formatDateLong(activeDate)}
         subtitle={activities[0]?.city || hotel?.city || 'Voyage Asie 2026'}
       />
-      <DateRail dates={dates} selectedDate={selectedDate} onSelect={setSelectedDate} />
-      {DAILY_PHOTO_TIPS[selectedDate] && (
+      <DateRail dates={dates} selectedDate={activeDate} onSelect={setSelectedDate} />
+      {DAILY_PHOTO_TIPS[activeDate] && (
         <InfoBanner icon="📷" label="Tip photo du jour">
-          {DAILY_PHOTO_TIPS[selectedDate]}
+          {DAILY_PHOTO_TIPS[activeDate]}
         </InfoBanner>
       )}
       {hotel && <HotelCard hotel={hotel} />}
@@ -376,7 +387,7 @@ function GuidePage({ places }) {
 
   return (
     <div className="page-grid guide-page">
-      <PageHeader eyebrow="Guide" title="Guide détaillé" subtitle="Vue chronologique du voyage" />
+      <PageHeader eyebrow="Guide" title="Guide détaillé" subtitle="Spots, photos et conseils jour par jour" />
       <section className="stack">
         {Object.entries(byDate).map(([date, datePlaces]) => (
           <article className="guide-day" key={date}>
@@ -384,9 +395,10 @@ function GuidePage({ places }) {
               <span>J{dayNumber(date)}</span>
               <h2>{formatDateLong(date)}</h2>
             </header>
-            <div className="compact-list">
+            {DAILY_PHOTO_TIPS[date] && <p className="date-tip">📷 {DAILY_PHOTO_TIPS[date]}</p>}
+            <div className="card-grid">
               {sortByTime(datePlaces).map((place) => (
-                <PlaceRow key={place.id} place={place} />
+                <PlaceCard key={place.id} place={place} />
               ))}
             </div>
           </article>
@@ -465,14 +477,17 @@ function PlaceCard({ place }) {
   const type = PLACE_TYPES[place.type] || PLACE_TYPES.default;
   return (
     <article className="place-card">
-      {place.photo ? (
-        <img className="place-card__photo" src={place.photo} alt={place.name} loading="lazy" />
-      ) : (
-        <div className="place-card__icon" style={{ background: colorForPlace(place) }}>
-          {type.emoji}
-        </div>
-      )}
-      <div>
+      <div className="place-card__media" style={{ background: colorForPlace(place) }}>
+        <span className="place-card__emoji" aria-hidden="true">{type.emoji}</span>
+        <img
+          className="place-card__photo"
+          src={photoForPlace(place)}
+          alt={place.name}
+          loading="lazy"
+          onError={(event) => event.currentTarget.remove()}
+        />
+      </div>
+      <div className="place-card__body">
         <div className="place-card__meta">
           {place.time || '—'} · {place.city}
           {place.rating ? (
@@ -483,7 +498,7 @@ function PlaceCard({ place }) {
         </div>
         <h3>{place.name}</h3>
         <p>{place.desc || type.label}</p>
-        {place.tips && <small>{place.tips}</small>}
+        {place.tips && <small>📷 {place.tips}</small>}
         <TagList tags={place.tags} />
       </div>
     </article>
@@ -598,6 +613,10 @@ function dayNumber(date) {
 
 function colorForPlace(place) {
   return COUNTRY_HEX[place.country] || '#b07a44';
+}
+
+function photoForPlace(place) {
+  return place.photo || TYPE_PHOTO_FALLBACK[place.type] || TYPE_PHOTO_FALLBACK.default;
 }
 
 function normalize(value, min, max) {
