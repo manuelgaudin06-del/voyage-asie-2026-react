@@ -104,8 +104,10 @@ function ProgramShell() {
   const prefersReduced = useReducedMotion();
   const [country, setCountry] = useState('all');
   const [query, setQuery] = useState('');
-  const isItinerary = location.pathname === '/itineraire';
-  const routeIndex = Math.max(0, CONTENT_ROUTES.indexOf(location.pathname));
+  // GitHub Pages peut ajouter un '/' final (ex. /photos/) -> on le retire pour comparer
+  const path = location.pathname.replace(/\/+$/, '') || '/';
+  const isItinerary = path === '/itineraire';
+  const routeIndex = Math.max(0, CONTENT_ROUTES.indexOf(path));
   const panX =
     CONTENT_ROUTES.length > 1 ? (routeIndex / (CONTENT_ROUTES.length - 1)) * 100 : 50;
 
@@ -121,10 +123,10 @@ function ProgramShell() {
   }, [country, query]);
 
   function renderPage() {
-    if (location.pathname === '/itineraire') return <ItineraryPage places={places} />;
-    if (location.pathname === '/photos') return <PhotosPage places={places} />;
-    if (location.pathname === '/restaurants') return <RestaurantsPage places={places} />;
-    if (location.pathname === '/guide') return <GuidePage places={places} />;
+    if (path === '/itineraire') return <ItineraryPage places={places} />;
+    if (path === '/photos') return <PhotosPage places={places} />;
+    if (path === '/restaurants') return <RestaurantsPage places={places} />;
+    if (path === '/guide') return <GuidePage places={places} />;
     return <DayPage places={places} />;
   }
 
@@ -165,7 +167,7 @@ function ProgramShell() {
       </nav>
 
       {isItinerary ? (
-        <section className="program-frame program-frame--native page-reveal" key={location.pathname} aria-label="Itinéraire du voyage">
+        <section className="program-frame program-frame--native page-reveal" key={path} aria-label="Itinéraire du voyage">
           <iframe
             title="Itinéraire interactif"
             src={asset('program.html?tab=itineraire&embed=1')}
@@ -178,7 +180,7 @@ function ProgramShell() {
       <motion.section
         className="program-frame program-frame--react"
         aria-label="Programme du voyage"
-        key={location.pathname}
+        key={path}
         initial={prefersReduced ? { opacity: 0 } : { opacity: 0, scale: 0.96, y: 12 }}
         animate={prefersReduced ? { opacity: 1 } : { opacity: 1, scale: 1, y: 0 }}
         transition={
