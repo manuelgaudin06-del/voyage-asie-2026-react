@@ -9,7 +9,7 @@
 .petal {
   position: absolute;
   top: -8%;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M12 2C9 6 4 8 4 13c0 4 3.6 7 8 7s8-3 8-7c0-5-5-7-8-11z' fill='%23f7b9c4'/%3E%3Cpath d='M12 3.5C10 7 6 8.6 6 12.8' stroke='%23e58aa0' stroke-width='0.6' fill='none' opacity='0.6'/%3E%3C/svg%3E");
+  /* background-image fourni en inline par FallingPetals.jsx (couleur aléatoire par feuille) */
   background-size: contain;
   background-repeat: no-repeat;
   /* deux animations combinées : chute verticale + balancement horizontal */

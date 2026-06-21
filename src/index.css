@@ -54,7 +54,7 @@ button {
   position: absolute;
   inset: 0;
   z-index: 0;
-  background-image: url('/fond-accueil-wide.webp');
+  /* background-image défini en inline dans App.jsx (préfixe base GitHub Pages) */
   background-size: auto 100%;
   background-repeat: no-repeat;
   transform: scale(1.01);
@@ -182,8 +182,17 @@ button {
 }
 
 .program-nav__home {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   flex-shrink: 0;
   white-space: nowrap;
+}
+
+.program-nav__home-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
 }
 
 .program-nav__links {
@@ -201,6 +210,7 @@ button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 7px;
   min-height: 36px;
   padding: 0 16px;
   border: 1px solid rgba(212, 175, 55, 0.3);
@@ -220,6 +230,18 @@ button {
     box-shadow 0.3s var(--ease-soft);
 }
 
+.program-nav__link-icon {
+  width: 25px;
+  height: 25px;
+  object-fit: contain;
+  transition: transform 0.3s var(--ease-soft);
+}
+
+.program-nav__link:hover .program-nav__link-icon,
+.program-nav__link--active .program-nav__link-icon {
+  transform: translateY(-1px) scale(1.08);
+}
+
 .program-nav__link:hover {
   background: rgba(255, 250, 240, 0.7);
   border-color: var(--gold);
@@ -234,7 +256,13 @@ button {
 
 .program-frame {
   position: absolute;
-  inset: 84px 18px 18px;
+  top: 84px;
+  bottom: 18px;
+  left: 18px;
+  right: 18px;
+  /* largeur calée sur le contenu centré (~1180px) pour laisser respirer la trame de fond sur les côtés */
+  width: min(1256px, calc(100% - 36px));
+  margin-inline: auto;
   z-index: 3;
   display: flex;
   min-height: 0;
@@ -335,6 +363,7 @@ button {
 }
 
 .program-content {
+  position: relative; /* contexte pour le voile de brume .page-reveal::before */
   flex: 1;
   min-height: 0;
   overflow: auto;
@@ -521,6 +550,29 @@ button {
   font-size: 0.9rem;
 }
 
+.watercolor-icon {
+  display: inline-flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.watercolor-icon > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.watercolor-icon__fallback {
+  line-height: 1;
+}
+
+.place-row__type-icon {
+  width: 27px;
+  height: 27px;
+}
+
 .place-row strong,
 .place-row small {
   display: block;
@@ -602,6 +654,12 @@ button {
   border-radius: 7px;
   background: #b07a44;
   color: #fffaf0;
+}
+
+.info-banner .watercolor-icon,
+.hotel-card > .watercolor-icon {
+  padding: 3px;
+  background: rgba(232, 202, 148, 0.3);
 }
 
 .info-banner strong,
@@ -688,9 +746,10 @@ button {
   justify-content: center;
 }
 
-.place-card__emoji {
-  font-size: 1.7rem;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
+.place-card__type-icon {
+  width: 62px;
+  height: 62px;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
 }
 
 .place-card__icon {
@@ -733,6 +792,27 @@ button {
   border-radius: 7px;
   background: rgba(232, 202, 148, 0.3);
   color: #405157;
+}
+
+/* Image-icon inside the banner square: fills the box, drops the brown bg */
+.info-banner > span:has(.banner-icon-img) {
+  background: transparent;
+  width: 46px;
+  height: 46px;
+}
+
+.banner-icon-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Small inline watercolor icon used in tips text */
+.inline-icon {
+  height: 1.35em;
+  width: auto;
+  vertical-align: -0.35em;
+  margin-right: 2px;
 }
 
 .guide-day header {
@@ -822,6 +902,11 @@ button {
   font-size: 1rem;
 }
 
+.transport-leg__mode .watercolor-icon {
+  width: 32px;
+  height: 32px;
+}
+
 .transport-leg__body strong {
   display: block;
   color: var(--ink);
@@ -877,6 +962,90 @@ button {
   }
   to {
     background-position: center center;
+  }
+}
+
+/* Révélation du contenu à chaque navigation : flou + décalage (sens du vent) -> net,
+   avec un voile de brume soufflé latéralement (gauche -> droite).
+   NB : pas de `position` ici pour ne pas casser les cadres déjà positionnés
+   (le cadre Itinéraire est en position: absolute). */
+/* La révélation du contenu (fondu + glissement + pop élastique) est désormais
+   pilotée par Framer Motion dans App.jsx (motion.div). On garde juste la brume ci-dessous. */
+
+/* Deux couches de brume texturée (volutes) qui dérivent à des vitesses
+   différentes -> profondeur/parallaxe. Chaque couche est faite de taches
+   douces (radial-gradient) découpées par un masque en bande (sens du vent). */
+.page-reveal::before,
+.page-reveal::after {
+  content: '';
+  position: absolute;
+  inset: -12%;
+  z-index: 5;
+  opacity: 0; /* invisible par défaut -> reste cachée pendant les 0,5 s de "fond seul" */
+  pointer-events: none;
+  background-repeat: no-repeat;
+}
+
+/* Couche nette : volutes denses au premier plan */
+.page-reveal::before {
+  background:
+    radial-gradient(42% 55% at 30% 35%, rgba(255, 255, 255, 0.95), transparent 70%),
+    radial-gradient(36% 50% at 55% 66%, rgba(255, 255, 255, 0.85), transparent 70%),
+    radial-gradient(50% 62% at 73% 40%, rgba(255, 255, 255, 0.9), transparent 72%),
+    radial-gradient(32% 46% at 46% 82%, rgba(255, 255, 255, 0.8), transparent 70%);
+  filter: blur(2px);
+  -webkit-mask-image: linear-gradient(100deg, transparent 8%, #000 36%, #000 62%, transparent 90%);
+  mask-image: linear-gradient(100deg, transparent 8%, #000 36%, #000 62%, transparent 90%);
+  /* 0,5 s de délai = la brume balaie au moment où le contenu apparaît (pas pendant le slide) */
+  animation: brume-sweep 2s var(--ease-soft) 0.5s both;
+}
+
+/* Couche diffuse : halo flou en arrière-plan, plus rapide -> parallaxe */
+.page-reveal::after {
+  background:
+    radial-gradient(58% 72% at 40% 50%, rgba(255, 255, 255, 0.7), transparent 72%),
+    radial-gradient(46% 60% at 66% 30%, rgba(255, 255, 255, 0.6), transparent 72%),
+    radial-gradient(40% 56% at 24% 72%, rgba(255, 255, 255, 0.65), transparent 72%);
+  filter: blur(9px);
+  -webkit-mask-image: linear-gradient(100deg, transparent 0%, #000 44%, #000 72%, transparent 100%);
+  mask-image: linear-gradient(100deg, transparent 0%, #000 44%, #000 72%, transparent 100%);
+  animation: brume-sweep-back 2.2s var(--ease-soft) 0.5s both;
+}
+
+@keyframes brume-sweep {
+  0% {
+    opacity: 0;
+    transform: translateX(-42%) scale(1.06);
+  }
+  22% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(46%) scale(1);
+  }
+}
+
+@keyframes brume-sweep-back {
+  0% {
+    opacity: 0;
+    transform: translateX(-58%) scale(1.14);
+  }
+  22% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(34%) scale(1.2);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-reveal {
+    animation: none;
+  }
+  .page-reveal::before {
+    display: none;
   }
 }
 

@@ -1,6 +1,14 @@
 import { useMemo, useState } from 'react';
 import { NavLink, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { motion, useReducedMotion } from 'framer-motion';
 import './index.css';
+import cameraIcon from './assets/icons/camera.png';
+import discoverIcon from './assets/icons/icon-discover.png';
+import galleryIcon from './assets/icons/icon-gallery.png';
+import homeIcon from './assets/icons/icon-home.png';
+import itineraryIcon from './assets/icons/icon-itinerary.png';
+import mapIcon from './assets/icons/icon-map.png';
+import transportIcon from './assets/icons/icon-transport.png';
 import { BoutonOrganic } from './components/ui/BoutonOrganic';
 import { FallingPetals } from './components/ui/FallingPetals';
 import {
@@ -16,12 +24,17 @@ import {
   TYPE_PHOTO_FALLBACK,
 } from './data/tripData';
 
+// Préfixe d'URL du site (= base Vite, ex. '/voyage-asie-2026-react/'). Sert pour tous
+// les fichiers de public/ référencés par une chaîne (photos, icônes, iframe, fonds).
+const BASE = import.meta.env.BASE_URL;
+const asset = (p) => BASE + String(p).replace(/^\//, '');
+
 const NAV_ITEMS = [
-  { to: '/itineraire', label: 'Itinéraire' },
-  { to: '/journee', label: 'Journée' },
-  { to: '/photos', label: 'Photo' },
-  { to: '/restaurants', label: 'Resto' },
-  { to: '/guide', label: 'Guide' },
+  { to: '/itineraire', label: 'Itinéraire', icon: itineraryIcon },
+  { to: '/journee', label: 'Journée', icon: discoverIcon },
+  { to: '/photos', label: 'Photo', icon: galleryIcon },
+  { to: '/restaurants', label: 'Resto', icon: asset('icons/restaurant.png') },
+  { to: '/guide', label: 'Guide', icon: mapIcon },
 ];
 
 const TRANSITION_MS = 900;
@@ -52,7 +65,7 @@ function HomePage() {
 
   return (
     <main className={`cover ${leaving ? 'cover--leaving' : ''}`}>
-      <div className="panorama panorama--cover" />
+      <div className="panorama panorama--cover" style={{ backgroundImage: `url(${asset('fond-accueil-wide.webp')})` }} />
       <div className="cover__veil" />
       <FallingPetals count={16} />
 
@@ -88,6 +101,7 @@ function HomePage() {
 function ProgramShell() {
   const location = useLocation();
   const navigate = useNavigate();
+  const prefersReduced = useReducedMotion();
   const [country, setCountry] = useState('all');
   const [query, setQuery] = useState('');
   const isItinerary = location.pathname === '/itineraire';
@@ -118,7 +132,7 @@ function ProgramShell() {
     <main className="program-shell">
       <div
         className="panorama panorama--program"
-        style={{ backgroundPosition: `${panX}% center` }}
+        style={{ backgroundImage: `url(${asset('fond-accueil-wide.webp')})`, backgroundPosition: `${panX}% center` }}
       />
       <div className="program-shell__shade" />
       <FallingPetals count={12} />
@@ -131,7 +145,8 @@ function ProgramShell() {
           className="bouton-organic--compact program-nav__home"
           onClick={() => navigate('/')}
         >
-          Voyage en Asie
+          <img className="program-nav__home-icon" src={homeIcon} alt="" />
+          <span>Voyage en Asie</span>
         </BoutonOrganic>
         <div className="program-nav__links">
           {NAV_ITEMS.map((item) => (
@@ -142,6 +157,7 @@ function ProgramShell() {
                 isActive ? 'program-nav__link program-nav__link--active' : 'program-nav__link'
               }
             >
+              <img className="program-nav__link-icon" src={item.icon} alt="" />
               {item.label}
             </NavLink>
           ))}
@@ -149,15 +165,35 @@ function ProgramShell() {
       </nav>
 
       {isItinerary ? (
-        <section className="program-frame program-frame--native" aria-label="Itinéraire du voyage">
+        <section className="program-frame program-frame--native page-reveal" key={location.pathname} aria-label="Itinéraire du voyage">
           <iframe
             title="Itinéraire interactif"
-            src="/program.html?tab=itineraire&embed=1"
+            src={asset('program.html?tab=itineraire&embed=1')}
             className="native-program-frame"
+            allow="fullscreen"
+            allowFullScreen
           />
         </section>
       ) : (
-      <section className="program-frame program-frame--react" aria-label="Programme du voyage">
+      <motion.section
+        className="program-frame program-frame--react"
+        aria-label="Programme du voyage"
+        key={location.pathname}
+        initial={prefersReduced ? { opacity: 0 } : { opacity: 0, scale: 0.96, y: 12 }}
+        animate={prefersReduced ? { opacity: 1 } : { opacity: 1, scale: 1, y: 0 }}
+        transition={
+          prefersReduced
+            ? { delay: 0.5, duration: 0.3 }
+            : {
+                // 0,5 s de "fond seul" : tout le panneau (barre + contenu) reste caché pendant le slide
+                opacity: { delay: 0.5, duration: 0.4 },
+                y: { delay: 0.5, duration: 0.5, ease: [0.16, 1, 0.3, 1] },
+                // ressort léger = petit "pop" doux
+                scale: { delay: 0.5, type: 'spring', stiffness: 260, damping: 20, mass: 0.8 },
+              }
+        }
+        style={{ transformOrigin: 'center top' }}
+      >
         <div className="app-toolbar">
           <div className="app-search">
             <span>Recherche</span>
@@ -184,8 +220,10 @@ function ProgramShell() {
             ))}
           </div>
         </div>
-        <div className="program-content">{renderPage()}</div>
-      </section>
+        <div className="program-content page-reveal">
+          {renderPage()}
+        </div>
+      </motion.section>
       )}
     </main>
   );
@@ -286,12 +324,15 @@ function DayPage({ places }) {
       />
       <DateRail dates={dates} selectedDate={activeDate} onSelect={setSelectedDate} />
       {DAILY_PHOTO_TIPS[activeDate] && (
-        <InfoBanner icon="📷" label="Tip photo du jour">
+        <InfoBanner icon={<img className="banner-icon-img" src={cameraIcon} alt="" />} label="Tip photo du jour">
           {DAILY_PHOTO_TIPS[activeDate]}
         </InfoBanner>
       )}
       {hotel && <HotelCard hotel={hotel} />}
-      <InfoBanner icon="🍜" label="Restaurants du jour">
+      <InfoBanner
+        icon={<WatercolorIcon src={asset('icons/restaurant.png')} fallback="🍜" />}
+        label="Restaurants du jour"
+      >
         {restaurants.length ? restaurants.map((resto) => resto.name).join(', ') : 'Aucun restaurant planifié.'}
       </InfoBanner>
       <StatsStrip
@@ -395,7 +436,7 @@ function GuidePage({ places }) {
               <span>J{dayNumber(date)}</span>
               <h2>{formatDateLong(date)}</h2>
             </header>
-            {DAILY_PHOTO_TIPS[date] && <p className="date-tip">📷 {DAILY_PHOTO_TIPS[date]}</p>}
+            {DAILY_PHOTO_TIPS[date] && <p className="date-tip"><img className="inline-icon" src={cameraIcon} alt="" /> {DAILY_PHOTO_TIPS[date]}</p>}
             <div className="card-grid">
               {sortByTime(datePlaces).map((place) => (
                 <PlaceCard key={place.id} place={place} />
@@ -456,10 +497,34 @@ function InfoBanner({ icon, label, children }) {
   );
 }
 
+function WatercolorIcon({ src, fallback, className = '' }) {
+  const [failed, setFailed] = useState(false);
+  return (
+    <span className={`watercolor-icon ${className}`} aria-hidden="true">
+      {failed ? (
+        <span className="watercolor-icon__fallback">{fallback}</span>
+      ) : (
+        <img src={src} alt="" onError={() => setFailed(true)} />
+      )}
+    </span>
+  );
+}
+
+function PlaceTypeIcon({ type, className = '' }) {
+  return (
+    <WatercolorIcon
+      src={asset(`icons/${type.icon}`)}
+      fallback={type.emoji}
+      className={className}
+    />
+  );
+}
+
 function HotelCard({ hotel }) {
+  const type = PLACE_TYPES.hotel;
   return (
     <article className="hotel-card">
-      <span>↪</span>
+      <PlaceTypeIcon type={type} className="hotel-card__icon" />
       <div>
         <p>Hébergement du soir</p>
         <h2>{hotel.name}</h2>
@@ -476,15 +541,21 @@ function SectionTitle({ children }) {
 function PlaceCard({ place }) {
   const type = PLACE_TYPES[place.type] || PLACE_TYPES.default;
   return (
-    <article className="place-card">
+    <article className="place-card place-card--typed">
       <div className="place-card__media" style={{ background: colorForPlace(place) }}>
-        <span className="place-card__emoji" aria-hidden="true">{type.emoji}</span>
+        <PlaceTypeIcon type={type} className="place-card__type-icon" />
         <img
           className="place-card__photo"
           src={photoForPlace(place)}
           alt={place.name}
           loading="lazy"
-          onError={(event) => event.currentTarget.remove()}
+          data-fallback={typeFallbackPhoto(place)}
+          onError={(event) => {
+            const img = event.currentTarget;
+            const fb = img.dataset.fallback;
+            if (fb && !img.src.endsWith(fb)) img.src = fb;
+            else img.remove();
+          }}
         />
       </div>
       <div className="place-card__body">
@@ -498,7 +569,7 @@ function PlaceCard({ place }) {
         </div>
         <h3>{place.name}</h3>
         <p>{place.desc || type.label}</p>
-        {place.tips && <small>📷 {place.tips}</small>}
+        {place.tips && <small><img className="inline-icon" src={cameraIcon} alt="" /> {place.tips}</small>}
         <TagList tags={place.tags} />
       </div>
     </article>
@@ -509,7 +580,9 @@ function PlaceRow({ place }) {
   const type = PLACE_TYPES[place.type] || PLACE_TYPES.default;
   return (
     <div className="place-row">
-      <span style={{ background: colorForPlace(place) }}>{type.emoji}</span>
+      <span style={{ background: colorForPlace(place) }}>
+        <PlaceTypeIcon type={type} className="place-row__type-icon" />
+      </span>
       <div>
         <strong>{place.name}</strong>
         <small>
@@ -546,7 +619,7 @@ function TransportSection() {
           return (
             <div className="transport-leg" key={`${leg.date}-${index}`}>
               <span className="transport-leg__mode" style={{ background: mode.color || 'var(--accent)' }}>
-                {mode.emoji || '→'}
+                <WatercolorIcon src={transportIcon} fallback={mode.emoji || '→'} />
               </span>
               <div className="transport-leg__body">
                 <strong>
@@ -615,8 +688,22 @@ function colorForPlace(place) {
   return COUNTRY_HEX[place.country] || '#b07a44';
 }
 
+// Petit hash stable d'une chaîne -> permet de choisir TOUJOURS la même variante pour un lieu donné
+function hashString(str) {
+  let h = 0;
+  const s = String(str);
+  for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) | 0;
+  return Math.abs(h);
+}
+
+// Choisit une image de secours dans le pool du type, de façon déterministe selon le lieu (variété)
+function typeFallbackPhoto(place) {
+  const pool = TYPE_PHOTO_FALLBACK[place.type] || TYPE_PHOTO_FALLBACK.default;
+  return asset(pool[hashString(place.id ?? place.name) % pool.length]);
+}
+
 function photoForPlace(place) {
-  return place.photo || TYPE_PHOTO_FALLBACK[place.type] || TYPE_PHOTO_FALLBACK.default;
+  return place.photo || typeFallbackPhoto(place);
 }
 
 function normalize(value, min, max) {

@@ -1937,27 +1937,29 @@ export const PLACE_TYPES = {
 
     // Fallback photos by category (Wikimedia Commons, libres de droits);
 
+// Images hébergées en local (public/photos, WebP compressé) -> fiables, hors-ligne, GitHub Pages.
+// Plusieurs images par type : chaque lieu en pioche une (voir photoForPlace dans App.jsx) -> variété.
 export const TYPE_PHOTO_FALLBACK = {
-      temple:     'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Kinkaku-ji_the_Golden_Temple_in_Kyoto_overlooking_the_lake_-_high_rez.JPG/600px-Kinkaku-ji_the_Golden_Temple_in_Kyoto_overlooking_the_lake_-_high_rez.JPG',
-      palace:     'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Gyeongbokgung_Palace_-_Seoul%2C_South_Korea-2.jpg/600px-Gyeongbokgung_Palace_-_Seoul%2C_South_Korea-2.jpg',
-      viewpoint:  'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Tokyo_Tower_and_top_of_Zojoji.jpg/600px-Tokyo_Tower_and_top_of_Zojoji.jpg',
-      photo:      'https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Shibuya_Crossing_2014.jpg/600px-Shibuya_Crossing_2014.jpg',
-      restaurant: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Tonkotsu_ramen_by_jetalone_in_Hakata%2C_Fukuoka.jpg/600px-Tonkotsu_ramen_by_jetalone_in_Hakata%2C_Fukuoka.jpg',
-      market:     'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Tsukiji_Fish_Market_-_Tuna.jpg/600px-Tsukiji_Fish_Market_-_Tuna.jpg',
-      museum:     'https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/National_Museum_of_Korea_2.jpg/600px-National_Museum_of_Korea_2.jpg',
-      park:       'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Shinjuku_Gyoen_National_Garden_Tokyo_Japan_01s3.jpg/600px-Shinjuku_Gyoen_National_Garden_Tokyo_Japan_01s3.jpg',
-      nature:     'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Zhangjiajie-Parque-p3210796.jpg/600px-Zhangjiajie-Parque-p3210796.jpg',
-      beach:      'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Haeundae_Beach_-_panoramio.jpg/600px-Haeundae_Beach_-_panoramio.jpg',
-      nightlife:  'https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Golden_Gai_%28Shinjuku%29.jpg/600px-Golden_Gai_%28Shinjuku%29.jpg',
-      shopping:   'https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Harajuku_Takeshita_Street.jpg/600px-Harajuku_Takeshita_Street.jpg',
-      transport:  'https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/JRW_Series_N700_S11_Shin-Osaka_20200620.jpg/600px-JRW_Series_N700_S11_Shin-Osaka_20200620.jpg',
-      hotel:      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Ryokan_room_Wakamatsu.jpg/600px-Ryokan_room_Wakamatsu.jpg',
-      activity:   'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Cherry_blossoms_at_night%2C_Chidorigafuchi%2C_2014.jpg/600px-Cherry_blossoms_at_night%2C_Chidorigafuchi%2C_2014.jpg',
-      cultural:   'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Shirakawa-go_in_winter_2019.jpg/600px-Shirakawa-go_in_winter_2019.jpg',
-      waterfall:  'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Kegon_Falls_2007.jpg/600px-Kegon_Falls_2007.jpg',
-      onsen:      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Takaragawa_Onsen_2.jpg/600px-Takaragawa_Onsen_2.jpg',
-      default:    'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mount_Fuji_from_Hakone.jpg/600px-Mount_Fuji_from_Hakone.jpg'
-    };
+  temple:     ['/photos/temple_1.webp', '/photos/temple_2.webp', '/photos/temple_3.webp', '/photos/temple_4.webp'],
+  palace:     ['/photos/palace_1.webp', '/photos/palace_2.webp', '/photos/palace_3.webp', '/photos/palace_4.webp'],
+  viewpoint:  ['/photos/viewpoint_1.webp', '/photos/viewpoint_2.webp', '/photos/viewpoint_3.webp', '/photos/viewpoint_4.webp'],
+  photo:      ['/photos/photo_1.webp', '/photos/photo_2.webp', '/photos/photo_3.webp', '/photos/photo_4.webp'],
+  restaurant: ['/photos/restaurant_1.webp', '/photos/restaurant_2.webp', '/photos/restaurant_3.webp'],
+  market:     ['/photos/market_1.webp', '/photos/market_2.webp', '/photos/market_3.webp', '/photos/market_4.webp'],
+  museum:     ['/photos/museum_1.webp', '/photos/museum_2.webp', '/photos/museum_3.webp', '/photos/museum_4.webp'],
+  park:       ['/photos/park_1.webp', '/photos/park_2.webp', '/photos/park_3.webp', '/photos/park_4.webp', '/photos/park_5.webp'],
+  nature:     ['/photos/nature_1.webp', '/photos/nature_2.webp', '/photos/nature_3.webp', '/photos/nature_4.webp'],
+  beach:      ['/photos/beach_1.webp', '/photos/beach_2.webp', '/photos/beach_3.webp', '/photos/beach_4.webp'],
+  nightlife:  ['/photos/nightlife_1.webp', '/photos/nightlife_2.webp', '/photos/nightlife_3.webp', '/photos/nightlife_4.webp', '/photos/nightlife_5.webp'],
+  shopping:   ['/photos/shopping_1.webp', '/photos/shopping_2.webp', '/photos/shopping_3.webp', '/photos/shopping_4.webp', '/photos/shopping_5.webp'],
+  transport:  ['/photos/transport_1.webp', '/photos/transport_2.webp', '/photos/transport_3.webp', '/photos/transport_4.webp', '/photos/transport_5.webp'],
+  hotel:      ['/photos/hotel_1.webp', '/photos/hotel_2.webp', '/photos/hotel_3.webp', '/photos/hotel_4.webp', '/photos/hotel_5.webp'],
+  activity:   ['/photos/activity_1.webp', '/photos/activity_2.webp', '/photos/activity_3.webp', '/photos/activity_4.webp', '/photos/activity_5.webp'],
+  cultural:   ['/photos/cultural_1.webp', '/photos/cultural_2.webp', '/photos/cultural_3.webp'],
+  waterfall:  ['/photos/waterfall_1.webp', '/photos/waterfall_2.webp', '/photos/waterfall_3.webp'],
+  onsen:      ['/photos/onsen_1.webp', '/photos/onsen_2.webp', '/photos/onsen_3.webp', '/photos/onsen_4.webp'],
+  default:    ['/photos/default_1.webp', '/photos/default_2.webp', '/photos/default_3.webp', '/photos/default_4.webp'],
+};
 
     // ===== MODES DE TRANSPORT =====;
 

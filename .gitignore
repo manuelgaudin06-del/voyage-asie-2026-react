@@ -29,3 +29,8 @@ Thumbs.db
 .env
 .env.local
 .env.*.local
+
+# Fichiers temporaires de test / captures
+_*.png
+_*.mjs
+_*.txt
