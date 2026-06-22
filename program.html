@@ -1292,6 +1292,8 @@
         backdrop-filter: saturate(180%) blur(20px);
       }
     }
+    /* Bouton de repli : visible seulement sur mobile (voir media 860px) */
+    #legend-toggle { display: none; }
     #legend h4 {
       font-family: var(--font-body);
       font-size: 10.5px;
@@ -1723,13 +1725,47 @@
       #timeline-range { width: 180px; }
       #add-place-btn, #add-hotel-btn { bottom: var(--s-4); }
       #add-hotel-btn { right: calc(var(--s-4) + 56px); }
+      /* Légende repliable en haut à droite : ne recouvre plus la carte */
       #legend {
-        top: auto;
-        bottom: 76px;
+        top: var(--s-3);
+        bottom: auto;
         right: var(--s-3);
         padding: var(--s-3);
         min-width: 0;
-        max-width: 180px;
+        max-width: 210px;
+        max-height: calc(100% - 24px);
+        overflow-y: auto;
+      }
+      #legend-toggle {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 8px;
+        padding: 0;
+        background: none;
+        border: none;
+        font: inherit;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text-secondary);
+        cursor: pointer;
+      }
+      #legend-toggle::after {
+        content: '▾';
+        margin-left: auto;
+        font-size: 10px;
+      }
+      #legend.is-collapsed {
+        padding: 8px 12px;
+      }
+      #legend.is-collapsed > :not(#legend-toggle) {
+        display: none;
+      }
+      #legend.is-collapsed #legend-toggle {
+        margin-bottom: 0;
+      }
+      #legend.is-collapsed #legend-toggle::after {
+        content: '▸';
       }
     }
 
@@ -3716,7 +3752,9 @@
   <div id="map-container">
     <div id="map"></div>
 
-    <div id="legend">
+    <div id="legend" class="is-collapsed">
+      <button type="button" id="legend-toggle" aria-label="Afficher ou masquer la légende"
+        onclick="this.parentNode.classList.toggle('is-collapsed')">Légende</button>
       <h4>Pays visités</h4>
       <div class="legend-item" onclick="filterPlaces('korea')">
         <div class="legend-dot" style="background:var(--korea)"></div>Corée du Sud
