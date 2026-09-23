@@ -72,12 +72,6 @@ function HomePage() {
       <section className="cover__content" aria-label="Page de garde">
         <h1 className="cover__title">Voyage en Asie</h1>
 
-        <div className="cover__haiku">
-          <p>Monts enneigés</p>
-          <p>Cerisiers qui fleurissent</p>
-          <p>Voyage éternel.</p>
-        </div>
-
         <div className="cover__cta">
           <BoutonOrganic variant="voyage" type="button" onClick={() => enterProgram('/journee')}>
             Découvrir
