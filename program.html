@@ -4171,28 +4171,15 @@ const PLACES = [
         tags: ['Photo', 'Culture', 'Incontournable'],
         type: 'photo', date: '2026-10-07', time: '19:00', isPhotoSpot: true
       },
-      // ===============================================
-      // ===== COREE DU SUD - ULSAN =====
-      // ===============================================
       {
-        id: 1402, country: 'korea', city: 'Gyeongju', name: 'Daewangam Park',
-        lat: 35.4966, lng: 129.4332,
-        rating: 4.4, ratingCount: 7500,
+        id: 1305, country: 'korea', city: 'Gyeongju', name: 'Musee national de Gyeongju',
+        lat: 35.8292, lng: 129.2281,
+        rating: 4.6, ratingCount: 9000,
         photo: null,
-        desc: 'Rochers + pins sur la cote, paysage cotier spectaculaire.',
-        tips: "ATTENTION : Daewangam est a 42 km au sud de Gyeongju, soit plus d'1h de bus chaque sens. Enchainer avec Bulguksa et Seokguram le matin n'est PAS faisable en transports en commun. A arbitrer : soit vous louez une voiture pour la journee, soit vous laissez tomber Ulsan au profit du musee national de Gyeongju, qui est a 1 km d'Anapji.",
-        tags: ['Excursion', 'Nature', 'Photo'],
-        type: 'nature', date: '2026-10-08', time: "14:30", isPhotoSpot: true
-      },
-      {
-        id: 1403, country: 'korea', city: 'Gyeongju', name: 'Ulsan Bridge Observatory',
-        lat: 35.4850, lng: 129.3760,
-        rating: 4.3, ratingCount: 5000,
-        photo: null,
-        desc: 'Petite tour panoramique face au pont suspendu.',
-        tips: "Meme remarque que Daewangam : cette excursion n'est realiste qu'en voiture. Gratuit, arret de 20 min.",
-        tags: ['Excursion', 'Vue', 'Architecture'],
-        type: 'viewpoint', date: '2026-10-08', time: "16:00", isPhotoSpot: true
+        desc: "Les tresors du royaume de Silla : couronnes en or, et dans le jardin la cloche du roi Seongdeok (19 tonnes, VIIIe siecle).",
+        tips: "Remplace l'excursion Ulsan (trop loin en bus apres Bulguksa et Seokguram). Gratuit, ouvert 10h-18h en semaine (derniere entree 17h30). A 600 m d'Anapji et 1,5 km du hanok. Retour de Seokguram : bus 12 puis 10/11 vers le centre, ~1h.",
+        tags: ['Culture', 'Museum'],
+        type: 'museum', date: '2026-10-08', time: "14:30", isPhotoSpot: false
       },
       // ===============================================
       // ===== COREE DU SUD - BUSAN =====
@@ -4864,7 +4851,7 @@ const PLACES = [
         rating: 4.5, ratingCount: 15000,
         photo: null,
         desc: 'Village + 8 bassins cristallins + Fuji en arriere-plan.',
-        tips: "Les bus retro de Kawaguchiko ont 3 lignes (rouge = rive nord, verte = Saiko, bleue = Shoji) et Oshino Hakkai est encore sur une autre ligne. Pass 2 jours ~1 500 yens, rentable des 3 trajets. Bassins gratuits, parking et boutiques payants.",
+        tips: "PAS couvert par le pass bus retro : bus Fujikyu separe depuis la gare de Kawaguchiko, ~25 min, ~600 yens l'aller. Bassins gratuits, parking et boutiques payants.",
         tags: ['Nature', 'Photo', 'Culture'],
         type: 'cultural', date: '2026-10-29', time: "11:00", isPhotoSpot: true
       },
@@ -4894,7 +4881,7 @@ const PLACES = [
         rating: 4.3, ratingCount: 4000,
         photo: null,
         desc: 'Spot tranquille, reflet Fuji inverse.',
-        tips: "ARBITRAGE : le lac Shoji est le plus a l'ouest et demande une 3e ligne de bus. Si la journee prend du retard, c'est le spot a sacrifier - Oishi Park et Saiko offrent deja le reflet du Fuji.",
+        tips: "Ligne bleue, couverte par le pass. ARBITRAGE : le lac Shoji est le plus a l'ouest. Si la journee prend du retard, c'est le spot a sacrifier - Oishi Park et Saiko offrent deja le reflet du Fuji.",
         tags: ['Nature', 'Photo'],
         type: 'nature', date: '2026-10-29', time: "16:30", isPhotoSpot: true
       },
@@ -5056,7 +5043,7 @@ const PLACES = [
         rating: 4.4, ratingCount: 22000,
         photo: null,
         desc: 'Reconstruction doree, jardins magnifiques.',
-        tips: "Arrivee de Takayama vers 13h par le Hida. Derniere entree 16h30, 500 yens. Le donjon principal est FERME au public (normes sismiques) : on visite le palais Hommaru, qui est la vraie merveille. Compter 1h30.",
+        tips: "Arrivee de Takayama vers 13h par le Hida. Derniere entree 16h30, 500 yens. Le donjon principal est FERME au public (normes sismiques) : on visite le palais Hommaru, qui est la vraie merveille. Compter 1h30. Le 02/11 est un lundi : le musee Toyota et le jardin Shirotori sont fermes, d'ou Toyota le 04/11.",
         tags: ['Culture', 'Photo'],
         type: 'palace', date: '2026-11-02', time: "13:30", isPhotoSpot: true
       },
@@ -5066,9 +5053,9 @@ const PLACES = [
         rating: 4.5, ratingCount: 16000,
         photo: null,
         desc: 'Sanctuaire imperial, foret sacree.',
-        tips: "Gratuit, avant le Shinkansen pour Kyoto. Foret sacree en pleine ville, abrite l'epee imperiale Kusanagi.",
+        tips: "Gratuit, le sanctuaire est ouvert des l'aube. Foret sacree en pleine ville, abrite l'epee imperiale Kusanagi. Ensuite Meitetsu Jingu-mae -> Nagoya (~10 min) pour le musee Toyota a 9h30.",
         tags: ['Temple', 'Culture'],
-        type: 'temple', date: "2026-11-04", time: "08:30", isPhotoSpot: true
+        type: 'temple', date: "2026-11-04", time: "08:00", isPhotoSpot: true
       },
       {
         id: 5603, country: 'japan', city: 'Nagoya', name: 'Oasis 21',
@@ -5091,34 +5078,24 @@ const PLACES = [
         type: 'nightlife', date: '2026-11-02', time: '20:00', isPhotoSpot: true
       },
       {
-        id: 5605, country: 'japan', city: 'Nagoya', name: 'Toyota Commemorative Museum',
+        id: 5605, country: 'japan', city: "Kyoto", name: 'Toyota Commemorative Museum',
         lat: 35.1795, lng: 136.8837,
         rating: 4.6, ratingCount: 12000,
         photo: null,
         desc: 'Architecture industrielle, histoire Toyota.',
-        tips: "500 yens, ferme a 17h (derniere entree 16h30). ARBITRAGE : l'apres-midi du 02/11 ne permet qu'UN SEUL de ce musee ou du jardin Shirotori, apres le chateau. Le musee Toyota est le plus singulier des deux.",
+        tips: "1 000 yens, 9h30-17h, FERME LE LUNDI : c'est pour ca qu'il n'est pas le 02/11. A 15-20 min a pied de la gare de Nagoya (ou Meitetsu, station Sako) : laisser les sacs en consigne a la gare et prendre le Shinkansen apres la visite. Compter 1h30-2h, demonstrations de metiers a tisser en marche.",
         tags: ['Museum', 'Culture'],
-        type: 'museum', date: "2026-11-02", time: "16:00", isPhotoSpot: true
+        type: 'museum', date: "2026-11-04", time: "09:30", isPhotoSpot: true
       },
       {
-        id: 5606, country: 'japan', city: 'Nagoya', name: 'Jardin Shirotori',
-        lat: 35.1280, lng: 136.9260,
-        rating: 4.3, ratingCount: 5000,
-        photo: null,
-        desc: "Jardin traditionnel japonais, le plus grand de Nagoya.",
-        tips: "300 yens, ferme a 17h. ARBITRAGE : alternative au musee Toyota, pas un complement - les deux sont a 7 km l'un de l'autre et ferment a la meme heure. Les erables ne seront pas encore rouges.",
-        tags: ['Nature', 'Photo'],
-        type: 'park', date: "2026-11-02", time: "16:00", isPhotoSpot: true
-      },
-      {
-        id: 5607, country: 'japan', city: "Kyoto", name: 'Rue Osu',
+        id: 5607, country: 'japan', city: "Nagoya", name: 'Rue Osu',
         lat: 35.1580, lng: 136.8980,
         rating: 4.3, ratingCount: 9000,
         photo: null,
         desc: 'Galerie marchande couverte, ambiance retro.',
-        tips: "Galerie couverte, gratuite : bon plan avant de prendre le Shinkansen. Friperies, boutiques otaku et street food.",
+        tips: "Galerie couverte, gratuite, a 1,5 km d'Oasis 21. Apres le chateau (metro Shiyakusho -> Kamimaezu, ~10 min). Friperies, boutiques otaku, street food, et le temple Osu Kannon a l'entree. Boutiques ouvertes jusqu'a ~20h.",
         tags: ['Shopping', 'Culture', 'Food'],
-        type: 'shopping', date: "2026-11-04", time: "10:00", isPhotoSpot: true
+        type: 'shopping', date: "2026-11-02", time: "15:30", isPhotoSpot: true
       },
       // ===============================================
       // ===== JAPON - KYOTO =====
@@ -5920,7 +5897,7 @@ const PLACES = [
       '2026-10-05': "Naksan Park au lever du soleil (gratuit, ouvert en continu). Feuillages encore verts : le pic a Seoul est mi-novembre.",
       '2026-10-06': "Excursion Suwon. Hwaseong : circuit 5,7 km, meilleur spot = porte Hwahongmun sur la riviere.",
       '2026-10-07': "Anapji de nuit : trepied obligatoire, f/8 ISO 200 expo 4s. Reflets parfaits sans vent.",
-      '2026-10-08': "Excursion Ulsan : Daewangam Park (rochers + pins) le matin, Ulsan Bridge Observatory l'apres-midi.",
+      '2026-10-08': "Bulguksa des l'ouverture a 9h, Seokguram ensuite (bus 12), puis musee national l'apres-midi, a 600 m d'Anapji.",
       '2026-10-09': "Gamcheon avant 9h = lumiere rasante sur les facades pastel. 70-350mm utile.",
       '2026-10-10': "Jagalchi 7h-9h pour l'activite des pecheurs. Le soir : drone show gratuit a Gwangalli, samedi 20h.",
       '2026-10-11': "The Bay 101 : meilleur spot nocturne de Busan. f/11 ISO 100, expo 8-15s, trepied.",
@@ -5940,14 +5917,14 @@ const PLACES = [
       '2026-10-25': "Yanaka : l'escalier Yuyake Dandan au coucher, torii de Nezu-jinja.",
       '2026-10-26': "Mont Takao : rando facile et Fuji par temps clair. Les momiji, eux, n'arrivent qu'autour du 29 novembre a Tokyo.",
       '2026-10-27': "Senso-ji a 5h30 : temple desert, lumiere douce. IBIS + f/2.8 suffisent.",
-      '2026-10-28': "Transfert Tokyo vers Kawaguchiko (checkout 10h) : foret d'Aokigahara l'apres-midi, puis onsen. Le Fuji, c'est demain matin.",
-      '2026-10-29': "Chureito a 6h30 pour le sunrise (398 marches), Oishi Park ensuite. Fuji degage ~60% des matins en octobre.",
+      '2026-10-28': "Transfert Tokyo vers Kawaguchiko (checkout 10h). A la gare, acheter le pass bus retro 2 jours (2 000 yens, guichet Fujikyu, valable 28 + 29) : foret d'Aokigahara l'apres-midi, puis onsen. Le Fuji, c'est demain matin.",
+      '2026-10-29': "Chureito a 6h30 pour le sunrise (398 marches), Oishi Park ensuite. Fuji degage ~60% des matins en octobre. Pass bus 2 jours (2 000 yens) achete la veille : couvre Oishi, Saiko et Shoji, pas Oshino Hakkai ni Chureito (train).",
       '2026-10-30': "Takayama : vieille ville Edo, riviere Miyagawa a la golden hour. 35mm ideal pour les ruelles.",
       '2026-10-31': "Shirakawa-go : PIC des couleurs fin octobre, c'est le bon moment. Observatoire Shiroyama = LE point de vue.",
       '2026-11-01': "Jour libre Takayama : marche matinal Miyagawa, Hida no Sato (fermes gassho) et brasseries de sake.",
-      '2026-11-02': "Oasis 21 a la blue hour : structure verre = reflets multiples. Grand angle 18mm.",
+      '2026-11-02': "Lundi : musees fermes. Chateau a l'arrivee, rue Osu ensuite, Oasis 21 a la blue hour (reflets multiples, grand angle 18mm).",
       '2026-11-03': "Excursion Gujo Hachiman (1h34 de bus, ferie au Japon) : canaux, Igawa Komichi, chateau. Polarisant obligatoire.",
-      '2026-11-04': "Arrivee de Nagoya vers midi. Kiyomizu-dera l'apres-midi, ruelles de Ninenzaka, puis Gion au crepuscule.",
+      '2026-11-04': "Atsuta a 8h, musee Toyota a 9h30 (sacs en consigne gare de Nagoya), Shinkansen vers 12h15. Kiyomizu-dera l'apres-midi, ruelles de Ninenzaka, puis Gion au crepuscule.",
       '2026-11-05': "Bambouseraie avant 8h = personne. 18mm vertical. Kinkaku-ji : soleil SO l'apres-midi.",
       '2026-11-06': "Nanzen-ji : l'aqueduc de brique et ses arches se photographient toute l'annee, sans attendre les erables.",
       '2026-11-07': "Fushimi Inari a 5h30 = 0 touriste, puis Tofuku-ji a une station. Photo INTERDITE sur le pont Tsutenkyo : passer par le Gaunkyo.",
