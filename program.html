@@ -4137,7 +4137,7 @@ const PLACES = [
         rating: 4.5, ratingCount: 14000,
         photo: null,
         desc: 'Tumulus royaux Silla dans un parc clos.',
-        tips: "Jour d'arrivee : le KTX depuis Seoul met ~2h et la gare KTX (qui s'appelle Gyeongju sur Korail, ex-Singyeongju) est a 7 km du centre : bus 700, 50 ou 51, ou taxi. Daereungwon est a 700 m du hanok, ouvert jusqu'a 22h : parfait pour l'apres-midi d'arrivee. 3 000 wons.",
+        tips: "Jour d'arrivee : KTX 029 reserve, depart Seoul Station 10h58, arrivee gare de Gyeongju 13h06. La gare est a 7 km du centre : bus 700, 50 ou 51 (~30-40 min) ou taxi (~15 000 wons), depot des sacs au hanok. Daereungwon est a 700 m du hanok, ouvert jusqu'a 22h. 3 000 wons.",
         tags: ['Culture', 'Photo', 'Nature'],
         type: 'cultural', date: '2026-10-07', time: "14:30", isPhotoSpot: true
       },
@@ -4190,9 +4190,9 @@ const PLACES = [
         rating: 4.6, ratingCount: 22000,
         photo: 'https://images.unsplash.com/photo-1589136154564-e1d9dc7ab80d?w=800',
         desc: 'Ruelles pastel, maisons colorees sur la colline.',
-        tips: "Jour d'arrivee : KTX depuis la gare de Gyeongju en fin de matinee (arrivee gare de Busan, puis metro ligne 1 direct jusqu'a Yangjeong), depot des bagages a Yangjeong, puis Gamcheon l'apres-midi. Gratuit. La lumiere rasante de fin d'apres-midi sur les facades pastel vaut celle du matin.",
+        tips: "Jour d'arrivee : KTX-Sancheon 317 reserve, Gyeongju 11h27 -> gare de Busan 12h01 (quitter le hanok vers 10h45). Metro ligne 1 direct jusqu'a Yangjeong (~20 min), depot des sacs, puis ligne 1 jusqu'a Toseong + bus 2 ou 2-2 pour Gamcheon. Gratuit. La lumiere rasante de fin d'apres-midi sur les facades pastel vaut celle du matin.",
         tags: ['Culture', 'Photo', 'Incontournable'],
-        type: 'cultural', date: '2026-10-09', time: "13:00", isPhotoSpot: true
+        type: 'cultural', date: '2026-10-09', time: "13:30", isPhotoSpot: true
       },
       {
         id: 1502, country: 'korea', city: 'Busan', name: 'Haedong Yonggungsa',
@@ -5862,8 +5862,8 @@ const PLACES = [
     // Chaque segment s'affiche au moment du changement de ville.
     const TRANSPORT_LEGS = [
       { date: '2026-10-01', from: 'Incheon',     to: 'Seoul',       mode: 'metro',  duration: '1h',    note: 'AREX Express depuis ICN' },
-      { date: '2026-10-07', from: 'Seoul',       to: 'Gyeongju',    mode: 'ktx',    duration: '2h15',  note: 'KTX Gyeongbu-Donghae' },
-      { date: '2026-10-09', from: 'Gyeongju',    to: 'Busan',       mode: 'train',  duration: '30min', note: 'KTX ou ITX' },
+      { date: '2026-10-07', from: 'Seoul',       to: 'Gyeongju',    mode: 'ktx',    duration: '2h08',  note: 'RESERVE - KTX 029, Seoul Station 10h58 -> Gyeongju 13h06, voiture 16, places 2A/2B/2C' },
+      { date: '2026-10-09', from: 'Gyeongju',    to: 'Busan',       mode: 'ktx',    duration: '34min', note: 'RESERVE - KTX-Sancheon 317, Gyeongju 11h27 -> Busan Station 12h01, voiture 8, places 11A/11B/11D' },
       { date: '2026-10-13', from: 'Busan',       to: 'Chiba',       mode: 'plane',  duration: '2h15',  note: 'Vol KE2129 Gimhae \u2192 Narita 11:35, puis train vers Chiba' },
       { date: '2026-10-15', from: 'Chiba',       to: 'Tokyo',       mode: 'train',  duration: '40min', note: 'Ligne Sobu vers Okachimachi' },
       { date: '2026-10-28', from: 'Tokyo',       to: 'Kawaguchiko', mode: 'train',  duration: '2h',    note: 'Train via Otsuki' },
@@ -5896,9 +5896,9 @@ const PLACES = [
       '2026-10-04': "Starfield Library : 35mm, f/4, ISO 800, symetrie parfaite. Trepied interdit.",
       '2026-10-05': "Naksan Park au lever du soleil (gratuit, ouvert en continu). Feuillages encore verts : le pic a Seoul est mi-novembre.",
       '2026-10-06': "Excursion Suwon. Hwaseong : circuit 5,7 km, meilleur spot = porte Hwahongmun sur la riviere.",
-      '2026-10-07': "Anapji de nuit : trepied obligatoire, f/8 ISO 200 expo 4s. Reflets parfaits sans vent.",
+      '2026-10-07': "KTX 029 a 10h58 depuis Seoul Station (arrivee 13h06). Anapji de nuit : trepied obligatoire, f/8 ISO 200 expo 4s. Reflets parfaits sans vent.",
       '2026-10-08': "Bulguksa des l'ouverture a 9h, Seokguram ensuite (bus 12), puis musee national l'apres-midi, a 600 m d'Anapji.",
-      '2026-10-09': "Gamcheon avant 9h = lumiere rasante sur les facades pastel. 70-350mm utile.",
+      '2026-10-09': "KTX 11h27 -> Busan 12h01. Gamcheon l'apres-midi : lumiere rasante sur les facades pastel en fin de journee. 70-350mm utile.",
       '2026-10-10': "Jagalchi 7h-9h pour l'activite des pecheurs. Le soir : drone show gratuit a Gwangalli, samedi 20h.",
       '2026-10-11': "The Bay 101 : meilleur spot nocturne de Busan. f/11 ISO 100, expo 8-15s, trepied.",
       '2026-10-12': "Beomeosa : 6h30 pour la brume. 70-350mm pour compresser foret et pagode.",
