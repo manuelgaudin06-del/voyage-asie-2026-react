@@ -20,7 +20,7 @@ export const PLACES = [
         rating: 4.4, ratingCount: 8500,
         photo: null,
         desc: 'Promenade pietonne en bord de mer, fontaine musicale le soir.',
-        tips: 'A 5 min a pied de l observatoire. Fontaine musicale en service jusqu a fin octobre, relache le lundi.',
+        tips: 'A 5 min a pied de l observatoire. Fontaine musicale en service jusqu a fin octobre, relache le lundi. Diner : jogae-gui (coquillages grilles a table) dans les restos du front de mer. Retour Airbnb en taxi ~10 min.',
         tags: ['Photo', 'Culture'],
         type: 'cultural', date: '2026-09-30', time: '19:00', isPhotoSpot: true
       },
@@ -30,9 +30,9 @@ export const PLACES = [
         rating: 4.3, ratingCount: 15000,
         photo: null,
         desc: 'Ruelles colorees, lanternes chinoises, ambiance unique.',
-        tips: 'Gouter les nouilles Jajangmyeon.',
+        tips: 'Descendre de Jayu Park par Chinatown. Voir la rue des fresques des Trois Royaumes (Samgukji Byeokhwa-geori), 150 m de murs peints. Gouter les jajangmyeon ou les mandu frits.',
         tags: ['Culture', 'Food', 'Photo'],
-        type: 'cultural', date: '2026-10-01', time: '09:00', isPhotoSpot: true
+        type: 'cultural', date: '2026-10-01', time: '09:15', isPhotoSpot: true
       },
       {
         id: 1004, country: 'korea', city: 'Incheon', name: 'Open Port Street',
@@ -40,13 +40,83 @@ export const PLACES = [
         rating: 4.1, ratingCount: 4200,
         photo: null,
         desc: 'Architecture neo-classique japonaise, quartier historique.',
-        tips: 'Batiments coloniaux bien preserves.',
+        tips: 'Apres le check-out de 11h (sacs en consigne a Incheon Station). Anciennes banques japonaises + Incheon Art Platform (entrepots en briques rouges devenus centre d art, gratuit).',
         tags: ['Architecture', 'Culture', 'Photo'],
-        type: 'photo', date: '2026-10-01', time: '14:00', isPhotoSpot: true
+        type: 'photo', date: '2026-10-01', time: '11:15', isPhotoSpot: true
+      },
+      {
+        id: 1005, country: 'korea', city: 'Incheon', name: 'INSPIRE Entertainment Resort (Aurora)',
+        lat: 37.4655, lng: 126.3885,
+        rating: null, ratingCount: 0,
+        photo: null,
+        desc: "Complexe a 10-15 min du Terminal 2 : galerie marchande + Aurora, une rue couverte d'un plafond LED de 150 m.",
+        tips: "Navette gratuite depuis le Terminal 2 (sortie 1er etage, entre les portes 4 et 5), toutes les 10-20 min. Mall 10h-22h, show Aurora toutes les 30 min. Consigne a bagages au T2 ou garder les sacs cabine. Ensuite vers Incheon Station : taxi Kakao T ~40 min par le pont d'Incheon (~40 000 W a 3).",
+        tags: ['Shopping', 'Photo'],
+        type: 'shopping', date: '2026-09-30', time: '11:00', isPhotoSpot: true
+      },
+      {
+        id: 1006, country: 'korea', city: 'Incheon', name: 'Songwol-dong Fairy Tale Village',
+        lat: 37.4779, lng: 126.6205,
+        rating: null, ratingCount: 0,
+        photo: null,
+        desc: "Ruelles decorees sur le theme des contes (Alice, Cendrillon, Pinocchio...). Gratuit, a 2 min de l'Airbnb.",
+        tips: 'Parfait pour se degourdir apres le check-in. Photo : les murs peints en contre-plongee, grand-angle. Tres calme en semaine.',
+        tags: ['Photo', 'Gratuit'],
+        type: 'photo', date: '2026-09-30', time: '15:30', isPhotoSpot: true
+      },
+      {
+        id: 1007, country: 'korea', city: 'Incheon', name: 'Wolmi Sea Train (monorail)',
+        lat: 37.476, lng: 126.616,
+        rating: null, ratingCount: 0,
+        photo: null,
+        desc: "Monorail aerien de 6 km qui fait le tour du port jusqu'a Wolmido. Vue sur la fresque geante des silos a grain.",
+        tips: "Gare juste a cote d'Incheon Station (sortie 1, a droite). Mercredi = 10h-18h, ferme le lundi : monter AVANT 17h30. Descendre a la station Wolmi Culture Street. ~8 000 W, a verifier sur place.",
+        tags: ['Photo', 'Transport'],
+        type: 'viewpoint', date: '2026-09-30', time: '16:45', isPhotoSpot: true
+      },
+      {
+        id: 1008, country: 'korea', city: 'Incheon', name: 'Jayu Park (Freedom Park)',
+        lat: 37.4758, lng: 126.6216,
+        rating: null, ratingCount: 0,
+        photo: null,
+        desc: "Premier parc a l'occidentale de Coree (1888), sur la colline au-dessus de Chinatown. Vue sur le port d'Incheon.",
+        tips: "A 10 min a pied de l'Airbnb. Monter tot (lumiere douce, personne). Redescendre par les escaliers cote Chinatown.",
+        tags: ['Nature', 'Photo', 'Gratuit'],
+        type: 'park', date: '2026-10-01', time: '08:30', isPhotoSpot: true
+      },
+      {
+        id: 1009, country: 'korea', city: 'Incheon', name: 'Musee du Jajangmyeon',
+        lat: 37.4748, lng: 126.6182,
+        rating: null, ratingCount: 0,
+        photo: null,
+        desc: "Petit musee sur 2 etages dans l'ancien restaurant Gonghwachun, berceau du jajangmyeon (nouilles a la sauce soja noire).",
+        tips: 'Ouvert 9h-18h, ferme le lundi. ~1 000-2 000 W, 20-30 min suffisent.',
+        tags: ['Culture', 'Food'],
+        type: 'museum', date: '2026-10-01', time: '10:00', isPhotoSpot: true
+      },
+      {
+        id: 1010, country: 'korea', city: 'Incheon', name: 'Sinpo International Market (dakgangjeong)',
+        lat: 37.4713, lng: 126.6271,
+        rating: null, ratingCount: 0,
+        photo: null,
+        desc: 'Marche centenaire, celebre pour le dakgangjeong : poulet frit enrobe de sauce sucree-piquante.',
+        tips: "Dejeuner avant le train : dakgangjeong a emporter (moitie de box pour 3 = large), ou un jajangmyeon a Chinatown si vous preferez vous asseoir. 5 min a pied d'Open Port Street.",
+        tags: ['Food', 'Marche'],
+        type: 'market', date: '2026-10-01', time: '12:00', isPhotoSpot: true
       },
       // ===============================================
       // ===== COREE DU SUD - SEOUL =====
       // ===============================================
+      {
+        id: 1117, country: 'korea', city: 'Seoul', name: 'Ikseon-dong + rue des pojangmacha de Jongno 3-ga',
+        lat: 37.5728, lng: 126.9895,
+        rating: null, ratingCount: 0,
+        photo: null,
+        desc: 'Ruelles de hanoks transformes en cafes et petits restos, puis les tentes-bars orange de Jongno 3-ga le soir.',
+        tips: "A 15 min a pied de l'Airbnb. Ikseon-dong en fin d'aprem (boutiques jusqu'a ~21h), puis diner en pojangmacha pres de la sortie 6 de Jongno 3-ga : tteokbokki, brochettes, soju. Premiere soiree tranquille.",
+        tags: ['Food', 'Culture', 'Photo'],
+        type: 'nightlife', date: '2026-10-01', time: '17:30', isPhotoSpot: true
+      },
       {
         id: 1101, country: 'korea', city: 'Seoul', name: 'Bukchon Hanok Village',
         lat: 37.5826, lng: 126.9837,
@@ -1965,7 +2035,7 @@ export const TRANSPORT_MODES = {
     // Chaque segment s'affiche au moment du changement de ville.;
 
 export const TRANSPORT_LEGS = [
-      { date: '2026-10-01', from: 'Incheon',     to: 'Seoul',       mode: 'metro',  duration: '1h',    note: 'AREX Express depuis ICN' },
+      { date: '2026-10-01', from: 'Incheon',     to: 'Seoul',       mode: 'metro',  duration: '1h15',  note: 'Ligne 1 directe Incheon Station -> Jongno 3-ga, depart ~13h15 du terminus (places assises)' },
       { date: '2026-10-07', from: 'Seoul',       to: 'Gyeongju',    mode: 'ktx',    duration: '2h08',  note: 'RESERVE - KTX 029, Seoul Station 10h58 -> Gyeongju 13h06' },
       { date: '2026-10-09', from: 'Gyeongju',    to: 'Busan',       mode: 'ktx',    duration: '34min', note: 'RESERVE - KTX-Sancheon 317, Gyeongju 11h27 -> Busan Station 12h01' },
       { date: '2026-10-13', from: 'Busan',       to: 'Chiba',       mode: 'plane',  duration: '2h15',  note: 'Vol KE2129 Gimhae \u2192 Narita 11:35, puis train vers Chiba' },
@@ -1994,8 +2064,8 @@ export const CITY_COORDS = {
     // ===== TIPS PHOTO PAR JOUR =====;
 
 export const DAILY_PHOTO_TIPS = {
-      '2026-09-30': "Wolmido : observatoire Wolmi pour la golden hour ~18h, puis fontaine musicale sur la Culture Street. f/8, ISO 100, trepied.",
-      '2026-10-01': "Matin a Incheon (Chinatown, Open Port Street) puis transfert Seoul. Lanternes et facades coloniales.",
+      '2026-09-30': "Atterrissage 9h35 au T2. INSPIRE : l'Aurora au plafond LED, pose lente pour les couleurs. Fin d'aprem : Fairy Tale Village, puis Sea Train vers Wolmido pour la golden hour ~18h et la fontaine musicale. f/8, ISO 100, trepied.",
+      '2026-10-01': "Jayu Park a 8h30 pour la vue sur le port en lumiere douce, Chinatown et ses fresques, Open Port Street. Check-out 11h. Train pour Seoul vers 13h15, soiree Ikseon-dong : hanoks eclaires et tentes orange des pojangmacha, ISO 1600-3200 a main levee.",
       '2026-10-02': "Bukchon : creneau legal 10h-17h seulement. Gyeongbokgung des 9h (releve 10h), Changdeokgung + jardin secret l'apres-midi, Changgyeonggung dans la foulee.",
       '2026-10-03': "DDP : exterieur LED la nuit = f/2.8 ISO 1600. Namsan au lever du jour depuis l'esplanade : la tour n'ouvre qu'a 10h.",
       '2026-10-04': "Starfield Library : 35mm, f/4, ISO 800, symetrie parfaite. Trepied interdit.",
