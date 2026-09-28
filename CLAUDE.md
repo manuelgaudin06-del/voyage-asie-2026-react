@@ -30,6 +30,10 @@ clairement, par étapes, et vérifier le résultat (Playwright est installé) av
   une **iframe** (`?embed=1`). C'est un gros fichier HTML autonome, hérité, vanilla JS.
 - **`src/data/tripData.js`** — toutes les données (PLACES, PLACE_TYPES, TYPE_PHOTO_FALLBACK,
   TRANSPORT_*, DAILY_PHOTO_TIPS, COUNTRY_*…). Les lieux sont les "places".
+- **`src/data/dayIdeas.js`** — `DAY_IDEAS` : « Idées en plus » jour par jour (≈170 idées + 12 plans B ☔,
+  Corée + Japon, Thaïlande exclue car déléguée). Affichées **uniquement dans l'onglet Guide** (cartes
+  compactes `IdeaCard`), PAS dans Journée / carte / `program.html` → pas besoin de les synchroniser.
+  Jours de fermeture pris en compte ; les infos incertaines sont marquées « à vérifier ».
 
 ## 🔑 Conventions / pièges importants
 

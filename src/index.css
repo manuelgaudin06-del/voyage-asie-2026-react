@@ -807,6 +807,99 @@ button {
   font-weight: 700;
 }
 
+/* Idées en plus (DAY_IDEAS) : cartes compactes sans photo, sous le programme du jour */
+.idea-block {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px dashed rgba(176, 122, 68, 0.45);
+}
+
+.idea-block__title {
+  margin: 0 0 10px;
+  color: var(--accent);
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+}
+
+.idea-block__title small {
+  display: block;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.idea-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: 10px;
+}
+
+.idea-card {
+  display: flex;
+  gap: 10px;
+  min-width: 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: rgba(255, 251, 242, 0.72);
+  border: 1px solid rgba(176, 122, 68, 0.2);
+}
+
+.idea-card__icon {
+  display: inline-flex;
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.idea-card__body {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.idea-card__meta {
+  display: block;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.idea-card strong {
+  display: block;
+  color: var(--ink);
+  line-height: 1.25;
+}
+
+.idea-card p {
+  margin: 4px 0 0;
+  color: #405157;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.idea-card__tip {
+  font-style: italic;
+}
+
+.idea-card--planb {
+  background: rgba(228, 238, 242, 0.8);
+  border-color: rgba(64, 81, 87, 0.25);
+}
+
+.idea-card__badge {
+  display: inline-block;
+  margin-right: 6px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: #405157;
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
 .empty-state {
   padding: 34px 22px;
   border: 1px dashed var(--line);

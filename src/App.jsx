@@ -23,6 +23,7 @@ import {
   TRANSPORT_MODES,
   TYPE_PHOTO_FALLBACK,
 } from './data/tripData';
+import { DAY_IDEAS } from './data/dayIdeas';
 
 // Préfixe d'URL du site (= base Vite, ex. '/voyage-asie-2026-react/'). Sert pour tous
 // les fichiers de public/ référencés par une chaîne (photos, icônes, iframe, fonds).
@@ -105,22 +106,23 @@ function ProgramShell() {
   const panX =
     CONTENT_ROUTES.length > 1 ? (routeIndex / (CONTENT_ROUTES.length - 1)) * 100 : 50;
 
-  const places = useMemo(() => {
-    return PLACES.filter((place) => {
+  const [places, ideas] = useMemo(() => {
+    const matches = (place) => {
       if (country !== 'all' && place.country !== country) return false;
       if (!query.trim()) return true;
       const haystack = [place.name, place.city, place.desc, place.tips, ...(place.tags || [])]
         .join(' ')
         .toLowerCase();
       return haystack.includes(query.trim().toLowerCase());
-    });
+    };
+    return [PLACES.filter(matches), DAY_IDEAS.filter(matches)];
   }, [country, query]);
 
   function renderPage() {
     if (path === '/itineraire') return <ItineraryPage places={places} />;
     if (path === '/photos') return <PhotosPage places={places} />;
     if (path === '/restaurants') return <RestaurantsPage places={places} />;
-    if (path === '/guide') return <GuidePage places={places} />;
+    if (path === '/guide') return <GuidePage places={places} ideas={ideas} />;
     return <DayPage places={places} />;
   }
 
@@ -419,25 +421,39 @@ function RestaurantsPage({ places }) {
   );
 }
 
-function GuidePage({ places }) {
-  const byDate = groupBy(sortByDate(places.filter((place) => place.date)), (place) => place.date);
+function GuidePage({ places, ideas }) {
+  const byDate = groupBy(places.filter((place) => place.date), (place) => place.date);
+  const ideasByDate = groupBy(ideas, (idea) => idea.date);
+  const dates = [...new Set([...Object.keys(byDate), ...Object.keys(ideasByDate)])].sort();
 
   return (
     <div className="page-grid guide-page">
-      <PageHeader eyebrow="Guide" title="Guide détaillé" subtitle="Spots, photos et conseils jour par jour" />
+      <PageHeader eyebrow="Guide" title="Guide détaillé" subtitle="Le programme, et des idées en plus pour chaque jour" />
       <section className="stack">
-        {Object.entries(byDate).map(([date, datePlaces]) => (
+        {dates.map((date) => (
           <article className="guide-day" key={date}>
             <header>
               <span>J{dayNumber(date)}</span>
               <h2>{formatDateLong(date)}</h2>
             </header>
             {DAILY_PHOTO_TIPS[date] && <p className="date-tip"><img className="inline-icon" src={cameraIcon} alt="" /> {DAILY_PHOTO_TIPS[date]}</p>}
-            <div className="card-grid">
-              {sortByTime(datePlaces).map((place) => (
-                <PlaceCard key={place.id} place={place} />
-              ))}
-            </div>
+            {byDate[date] && (
+              <div className="card-grid">
+                {sortByTime(byDate[date]).map((place) => (
+                  <PlaceCard key={place.id} place={place} />
+                ))}
+              </div>
+            )}
+            {ideasByDate[date] && (
+              <div className="idea-block">
+                <h3 className="idea-block__title">💡 Idées en plus <small>dans le coin, si l'envie ou le temps · ☔ = plan B si la météo ou le planning coince</small></h3>
+                <div className="idea-list">
+                  {sortByTime(ideasByDate[date]).map((idea) => (
+                    <IdeaCard key={idea.id} idea={idea} />
+                  ))}
+                </div>
+              </div>
+            )}
           </article>
         ))}
       </section>
@@ -567,6 +583,26 @@ function PlaceCard({ place }) {
         <p>{place.desc || type.label}</p>
         {place.tips && <small><img className="inline-icon" src={cameraIcon} alt="" /> {place.tips}</small>}
         <TagList tags={place.tags} />
+      </div>
+    </article>
+  );
+}
+
+function IdeaCard({ idea }) {
+  const type = PLACE_TYPES[idea.type] || PLACE_TYPES.default;
+  return (
+    <article className={idea.kind === 'planb' ? 'idea-card idea-card--planb' : 'idea-card'}>
+      <span className="idea-card__icon" style={{ background: colorForPlace(idea) }}>
+        <PlaceTypeIcon type={type} className="place-row__type-icon" />
+      </span>
+      <div className="idea-card__body">
+        <small className="idea-card__meta">
+          {idea.kind === 'planb' && <span className="idea-card__badge">☔ Plan B</span>}
+          vers {idea.time} · {idea.city}
+        </small>
+        <strong>{idea.name}</strong>
+        <p>{idea.desc}</p>
+        {idea.tips && <p className="idea-card__tip">👉 {idea.tips}</p>}
       </div>
     </article>
   );
