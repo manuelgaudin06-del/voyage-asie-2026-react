@@ -1170,3 +1170,110 @@ button {
     overflow-wrap: anywhere;
   }
 }
+
+/* ===== Téléphone : en-tête fin, onglets en bas, page qui défile en entier =====
+   La nav passe en display: contents pour que le bouton titre et les onglets
+   deviennent des éléments de la colonne .program-shell et soient réordonnés :
+   titre en haut, cadre au milieu, onglets en bas (pas de position fixe). */
+@media (max-width: 860px) {
+  .program-nav {
+    display: contents;
+  }
+
+  .program-nav__home {
+    order: 0;
+    align-self: center;
+    margin: 8px 10px 6px;
+    padding: 6px 22px;
+    font-size: 0.78rem;
+    letter-spacing: 1.2px;
+  }
+
+  .program-nav__home-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .program-frame {
+    order: 1;
+    margin: 0 8px;
+  }
+
+  .program-nav__links {
+    order: 2;
+    position: relative;
+    z-index: 4;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 2px;
+    margin: 6px 8px 0;
+    padding: 4px 4px calc(4px + env(safe-area-inset-bottom, 0px));
+    border: 1px solid rgba(212, 175, 55, 0.34);
+    border-bottom: none;
+    border-radius: 10px 10px 0 0;
+    background: rgba(255, 250, 238, 0.92);
+    box-shadow: 0 -8px 24px rgba(20, 20, 20, 0.12);
+    backdrop-filter: blur(14px);
+  }
+
+  .program-nav__link {
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    min-height: 52px;
+    padding: 4px 0;
+    border-color: transparent;
+    background: transparent;
+    font-size: 0.62rem;
+    letter-spacing: 0.3px;
+    box-shadow: none;
+  }
+
+  .program-nav__link--active {
+    border-color: var(--gold);
+    background: linear-gradient(135deg, var(--gold), var(--accent));
+    box-shadow: 0 4px 12px rgba(176, 122, 68, 0.3);
+  }
+
+  .program-nav__link-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* Le cadre défile en entier : la barre recherche/filtres part avec le contenu */
+  .program-frame--react {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .program-frame--react .program-content {
+    flex: none;
+    overflow: visible;
+  }
+
+  .app-toolbar {
+    gap: 8px;
+    padding: 10px;
+  }
+
+  .app-search > span {
+    display: none;
+  }
+
+  .app-search input {
+    padding: 7px 12px;
+  }
+
+  .country-filter {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .country-filter button {
+    min-height: 30px;
+    padding: 0 12px;
+    font-size: 0.85rem;
+  }
+}

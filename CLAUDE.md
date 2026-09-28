@@ -68,7 +68,21 @@ Passe responsive faite le **2026-06-22** (déployée) :
   vignette photo 96→64 px, marges réduites, `overflow-wrap: anywhere` sur les textes.
 - Méthode de vérif : Playwright en iPhone (390 px) **et** 320 px, + détecteur d'éléments qui
   dépassent la largeur (boucle qui compare `getBoundingClientRect().width` au viewport).
-- **Reste à faire mobile** : confort tactile de la carte ; tailles texte/boutons.
+- **Refonte mobile du 2026-09-28** (déployée) — cibles réelles : S22 Ultra 384×854 (Manuel),
+  S24 360×780 (Elliot), vieil iPhone 8/SE 375×667 (Quentin, le plus contraignant) :
+  - `.program-nav` en `display: contents` sous 860 px → titre compact en haut, **barre d'onglets
+    en bas** (grille 5 colonnes, icône au-dessus du libellé) réordonnée via `order`, sans
+    `position: fixed`. `viewport-fit=cover` + `env(safe-area-inset-bottom)` pour l'iPhone.
+  - Recherche + filtres pays compacts et qui **défilent avec le contenu**
+    (`.program-frame--react` scrolle, plus `.program-content`).
+  - Itinéraire (embed, `program.html`) : stats masquées, panneau à 40 %, carte recentrée sur
+    tous les lieux au chargement (clic auto sur `#btn-fit-all`), boutons zoom Leaflet masqués.
+- **Fond de carte = OpenStreetMap** (`tile.openstreetmap.org`). CartoDB affichait
+  « API KEY REQUIRED » (clé désormais obligatoire) → ne pas y revenir.
+- **Icônes en WebP 256 px** (`src/assets/icons/*.webp`, `public/icons/*.webp`) : 32,6 Mo → 0,4 Mo.
+  Les `icon:` de `PLACE_TYPES` (tripData.js ET program.html) pointent vers `.webp`.
+- **Reste lourd** : `public/fond-accueil-wide.webp` (2,5 Mo, fond de toutes les pages) et
+  `public/japan.mp4` (4 Mo, voile d'arrivée de l'Itinéraire).
 
 ## 🇹🇭 Thaïlande — ✅ DÉLÉGUÉ (2026-09-20), ne plus s'en occuper
 
@@ -117,10 +131,7 @@ actuellement taggés `city: 'Bangkok'` par erreur dans tripData.js).
 
 ## 📋 Mises à jour futures (à faire)
 
-1. **Alléger les icônes du menu** (⚠️ priorité, important pour le chargement **en 4G** en voyage) :
-   `src/assets/icons/*.png` (icon-home, icon-map, icon-discover, icon-itinerary, icon-transport,
-   icon-gallery) font ~1 Mo chacune (~6 Mo total) pour un affichage ~25 px. Confirmé à chaque
-   `npm run deploy` (le build les liste). → Les convertir en **WebP** (comme les photos).
+1. ~~Alléger les icônes~~ ✅ fait le 2026-09-28 (WebP 256 px, 32,6 Mo → 0,4 Mo).
 2. **Vraies photos par lieu** : trouver une source fiable pour la photo réelle de chaque lieu
    (Wikimedia bloqué localement ; piste = API d'images avec clé, ou curation manuelle).
 3. **(Optionnel)** Nom de domaine perso pour une URL plus jolie.

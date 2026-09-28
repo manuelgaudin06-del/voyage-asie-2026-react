@@ -1901,25 +1901,25 @@ export const PLACES = [
     // Snapshot of the original hardcoded places so we can revert user overrides;
 
 export const PLACE_TYPES = {
-      temple:    { label: 'Temple / Sanctuaire', icon: 'temple.png',    emoji: '\u26E9\uFE0F' },
-      palace:    { label: 'Palais / Chateau',    icon: 'palace.png',    emoji: '\uD83C\uDFEF' },
-      viewpoint: { label: 'Point de vue',        icon: 'viewpoint.png', emoji: '\uD83D\uDC41\uFE0F' },
-      photo:     { label: 'Spot Photo',          icon: 'camera.png',    emoji: '\uD83D\uDCF7' },
-      restaurant:{ label: 'Restaurant / Food',   icon: 'restaurant.png',emoji: '\uD83C\uDF5C' },
-      market:    { label: 'Marche / Street Food', icon: 'market.png',   emoji: '\uD83D\uDED2' },
-      museum:    { label: 'Musee / Art',         icon: 'museum.png',    emoji: '\uD83C\uDFDB\uFE0F' },
-      park:      { label: 'Parc / Jardin',       icon: 'park.png',      emoji: '\uD83C\uDF3F' },
-      nature:    { label: 'Nature / Montagne',   icon: 'nature.png',    emoji: '\uD83C\uDFDE\uFE0F' },
-      beach:     { label: 'Plage / Cote',        icon: 'beach.png',     emoji: '\uD83C\uDFD6\uFE0F' },
-      nightlife: { label: 'Nightlife / Bar',     icon: 'nightlife.png', emoji: '\uD83C\uDF03' },
-      shopping:  { label: 'Shopping',            icon: 'shopping.png',  emoji: '\uD83D\uDECD\uFE0F' },
-      transport: { label: 'Transport',           icon: 'transport.png', emoji: '\u2708\uFE0F' },
-      hotel:     { label: 'Hotel / Repos',       icon: 'hotel.png',     emoji: '\uD83C\uDFE8' },
-      activity:  { label: 'Activite',            icon: 'activity.png',  emoji: '\uD83C\uDFAF' },
-      cultural:  { label: 'Village / Culture',   icon: 'cultural.png',  emoji: '\uD83C\uDFD8\uFE0F' },
-      waterfall: { label: 'Cascade',             icon: 'waterfall.png', emoji: '\uD83D\uDCA7' },
-      onsen:     { label: 'Onsen / Spa',         icon: 'onsen.png',     emoji: '\u2668\uFE0F' },
-      default:   { label: 'Lieu',                icon: 'default.png',   emoji: '\uD83D\uDCCD' }
+      temple:    { label: 'Temple / Sanctuaire', icon: 'temple.webp',    emoji: '\u26E9\uFE0F' },
+      palace:    { label: 'Palais / Chateau',    icon: 'palace.webp',    emoji: '\uD83C\uDFEF' },
+      viewpoint: { label: 'Point de vue',        icon: 'viewpoint.webp', emoji: '\uD83D\uDC41\uFE0F' },
+      photo:     { label: 'Spot Photo',          icon: 'camera.webp',    emoji: '\uD83D\uDCF7' },
+      restaurant:{ label: 'Restaurant / Food',   icon: 'restaurant.webp',emoji: '\uD83C\uDF5C' },
+      market:    { label: 'Marche / Street Food', icon: 'market.webp',   emoji: '\uD83D\uDED2' },
+      museum:    { label: 'Musee / Art',         icon: 'museum.webp',    emoji: '\uD83C\uDFDB\uFE0F' },
+      park:      { label: 'Parc / Jardin',       icon: 'park.webp',      emoji: '\uD83C\uDF3F' },
+      nature:    { label: 'Nature / Montagne',   icon: 'nature.webp',    emoji: '\uD83C\uDFDE\uFE0F' },
+      beach:     { label: 'Plage / Cote',        icon: 'beach.webp',     emoji: '\uD83C\uDFD6\uFE0F' },
+      nightlife: { label: 'Nightlife / Bar',     icon: 'nightlife.webp', emoji: '\uD83C\uDF03' },
+      shopping:  { label: 'Shopping',            icon: 'shopping.webp',  emoji: '\uD83D\uDECD\uFE0F' },
+      transport: { label: 'Transport',           icon: 'transport.webp', emoji: '\u2708\uFE0F' },
+      hotel:     { label: 'Hotel / Repos',       icon: 'hotel.webp',     emoji: '\uD83C\uDFE8' },
+      activity:  { label: 'Activite',            icon: 'activity.webp',  emoji: '\uD83C\uDFAF' },
+      cultural:  { label: 'Village / Culture',   icon: 'cultural.webp',  emoji: '\uD83C\uDFD8\uFE0F' },
+      waterfall: { label: 'Cascade',             icon: 'waterfall.webp', emoji: '\uD83D\uDCA7' },
+      onsen:     { label: 'Onsen / Spa',         icon: 'onsen.webp',     emoji: '\u2668\uFE0F' },
+      default:   { label: 'Lieu',                icon: 'default.webp',   emoji: '\uD83D\uDCCD' }
     };
 
     // Fallback photos by category (Wikimedia Commons, libres de droits);

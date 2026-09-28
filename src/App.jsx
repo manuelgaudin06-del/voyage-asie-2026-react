@@ -2,13 +2,13 @@ import { useMemo, useState } from 'react';
 import { NavLink, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { motion, useReducedMotion } from 'framer-motion';
 import './index.css';
-import cameraIcon from './assets/icons/camera.png';
-import discoverIcon from './assets/icons/icon-discover.png';
-import galleryIcon from './assets/icons/icon-gallery.png';
-import homeIcon from './assets/icons/icon-home.png';
-import itineraryIcon from './assets/icons/icon-itinerary.png';
-import mapIcon from './assets/icons/icon-map.png';
-import transportIcon from './assets/icons/icon-transport.png';
+import cameraIcon from './assets/icons/camera.webp';
+import discoverIcon from './assets/icons/icon-discover.webp';
+import galleryIcon from './assets/icons/icon-gallery.webp';
+import homeIcon from './assets/icons/icon-home.webp';
+import itineraryIcon from './assets/icons/icon-itinerary.webp';
+import mapIcon from './assets/icons/icon-map.webp';
+import transportIcon from './assets/icons/icon-transport.webp';
 import { BoutonOrganic } from './components/ui/BoutonOrganic';
 import { FallingPetals } from './components/ui/FallingPetals';
 import {
@@ -33,7 +33,7 @@ const NAV_ITEMS = [
   { to: '/itineraire', label: 'Itinéraire', icon: itineraryIcon },
   { to: '/journee', label: 'Journée', icon: discoverIcon },
   { to: '/photos', label: 'Photo', icon: galleryIcon },
-  { to: '/restaurants', label: 'Resto', icon: asset('icons/restaurant.png') },
+  { to: '/restaurants', label: 'Resto', icon: asset('icons/restaurant.webp') },
   { to: '/guide', label: 'Guide', icon: mapIcon },
 ];
 
@@ -326,7 +326,7 @@ function DayPage({ places }) {
       )}
       {hotel && <HotelCard hotel={hotel} />}
       <InfoBanner
-        icon={<WatercolorIcon src={asset('icons/restaurant.png')} fallback="🍜" />}
+        icon={<WatercolorIcon src={asset('icons/restaurant.webp')} fallback="🍜" />}
         label="Restaurants du jour"
       >
         {restaurants.length ? restaurants.map((resto) => resto.name).join(', ') : 'Aucun restaurant planifié.'}
