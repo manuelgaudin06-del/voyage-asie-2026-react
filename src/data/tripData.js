@@ -1762,7 +1762,7 @@ export const PLACES = [
         rating: null, ratingCount: 0,
         photo: null,
         desc: "1 nuit (30/09 au 01/10), ~116 EUR. Quartier Songwol-dong, a 5 min a pied de Incheon Station.",
-        tips: "https://airbnb.fr/rooms/1351093113418345228",
+        tips: "",
         tags: ['Hotel'],
         type: 'hotel', date: '2026-09-30', time: '15:00', isPhotoSpot: false
       },
@@ -1772,7 +1772,7 @@ export const PLACES = [
         rating: null, ratingCount: 0,
         photo: null,
         desc: "6 nuits (01 au 07/10), ~525 EUR. 2 chambres, au pied de Naksan Park, 9 spots a pied.",
-        tips: "https://airbnb.fr/rooms/1376035288548014084",
+        tips: "",
         tags: ['Hotel'],
         type: 'hotel', date: '2026-10-01', time: '15:00', isPhotoSpot: false
       },
@@ -1792,7 +1792,7 @@ export const PLACES = [
         rating: null, ratingCount: 0,
         photo: null,
         desc: "4 nuits (09 au 13/10), ~330 EUR. 3 chambres separees, Ligne 1 directe (Yangjeong Station).",
-        tips: "https://airbnb.fr/rooms/1319448047613724919",
+        tips: "",
         tags: ['Hotel'],
         type: 'hotel', date: '2026-10-09', time: '15:00', isPhotoSpot: false
       },
@@ -1802,7 +1802,7 @@ export const PLACES = [
         rating: null, ratingCount: 0,
         photo: null,
         desc: "2 nuits (13 au 15/10), 152 EUR. A 3 min de la gare JR Chiba, 4 lits separes, ascenseur.",
-        tips: "https://airbnb.fr/rooms/1483465012014293038",
+        tips: "",
         tags: ['Hotel'],
         type: 'hotel', date: '2026-10-13', time: '15:00', isPhotoSpot: false
       },
@@ -1812,7 +1812,7 @@ export const PLACES = [
         rating: null, ratingCount: 0,
         photo: null,
         desc: "13 nuits (15 au 28/10), 1236 EUR. Entre Okachimachi et Akihabara, 3 lits separes, licence hoteliere.",
-        tips: "https://airbnb.fr/rooms/39953935",
+        tips: "",
         tags: ['Hotel'],
         type: 'hotel', date: '2026-10-15', time: '15:00', isPhotoSpot: false
       },
@@ -1842,7 +1842,7 @@ export const PLACES = [
         rating: null, ratingCount: 0,
         photo: null,
         desc: "2 nuits (02 au 04/11), ~220 EUR. Centre Nagoya, 6 min de Hisaya-Odori, 3 couchages.",
-        tips: "https://airbnb.fr/rooms/17530706",
+        tips: "",
         tags: ['Hotel'],
         type: 'hotel', date: '2026-11-02', time: '15:00', isPhotoSpot: false
       },
@@ -1852,7 +1852,7 @@ export const PLACES = [
         rating: null, ratingCount: 0,
         photo: null,
         desc: "4 nuits (04 au 08/11), ~428 EUR. Maison machiya centrale, 2 SdB, 5 futons, licence hoteliere.",
-        tips: "https://airbnb.fr/rooms/44598207",
+        tips: "",
         tags: ['Hotel'],
         type: 'hotel', date: '2026-11-04', time: '15:00', isPhotoSpot: false
       },
@@ -1862,7 +1862,7 @@ export const PLACES = [
         rating: null, ratingCount: 0,
         photo: null,
         desc: "1 nuit (08 au 09/11), ~90 EUR. A 5 min de la gare Kintetsu-Nara, douche/WC prives, 3 lits.",
-        tips: "https://airbnb.fr/rooms/30784630",
+        tips: "",
         tags: ['Hotel'],
         type: 'hotel', date: '2026-11-08', time: '15:00', isPhotoSpot: false
       },
@@ -1872,7 +1872,7 @@ export const PLACES = [
         rating: null, ratingCount: 0,
         photo: null,
         desc: "4 nuits (09 au 13/11), ~320 EUR. 7 min de Nagahoribashi, 3 couchages, KIX en 42 min.",
-        tips: "https://airbnb.fr/rooms/615411277148859670",
+        tips: "",
         tags: ['Hotel'],
         type: 'hotel', date: '2026-11-09', time: '15:00', isPhotoSpot: false
       },
@@ -1966,8 +1966,8 @@ export const TRANSPORT_MODES = {
 
 export const TRANSPORT_LEGS = [
       { date: '2026-10-01', from: 'Incheon',     to: 'Seoul',       mode: 'metro',  duration: '1h',    note: 'AREX Express depuis ICN' },
-      { date: '2026-10-07', from: 'Seoul',       to: 'Gyeongju',    mode: 'ktx',    duration: '2h08',  note: 'RESERVE - KTX 029, Seoul Station 10h58 -> Gyeongju 13h06, voiture 16, places 2A/2B/2C' },
-      { date: '2026-10-09', from: 'Gyeongju',    to: 'Busan',       mode: 'ktx',    duration: '34min', note: 'RESERVE - KTX-Sancheon 317, Gyeongju 11h27 -> Busan Station 12h01, voiture 8, places 11A/11B/11D' },
+      { date: '2026-10-07', from: 'Seoul',       to: 'Gyeongju',    mode: 'ktx',    duration: '2h08',  note: 'RESERVE - KTX 029, Seoul Station 10h58 -> Gyeongju 13h06' },
+      { date: '2026-10-09', from: 'Gyeongju',    to: 'Busan',       mode: 'ktx',    duration: '34min', note: 'RESERVE - KTX-Sancheon 317, Gyeongju 11h27 -> Busan Station 12h01' },
       { date: '2026-10-13', from: 'Busan',       to: 'Chiba',       mode: 'plane',  duration: '2h15',  note: 'Vol KE2129 Gimhae \u2192 Narita 11:35, puis train vers Chiba' },
       { date: '2026-10-15', from: 'Chiba',       to: 'Tokyo',       mode: 'train',  duration: '40min', note: 'Ligne Sobu vers Okachimachi' },
       { date: '2026-10-28', from: 'Tokyo',       to: 'Kawaguchiko', mode: 'train',  duration: '2h',    note: 'Train via Otsuki' },
