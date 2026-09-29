@@ -277,6 +277,16 @@ export const PLACES = [
         tags: ['Nature', 'Photo'],
         type: 'park', date: '2026-10-05', time: '16:30', isPhotoSpot: true
       },
+      {
+        id: 1118, country: 'korea', city: 'Seoul', name: 'Hongdae (soiree)',
+        lat: 37.5563, lng: 126.9236,
+        rating: null, ratingCount: 0,
+        photo: null,
+        desc: 'Quartier etudiant de Hongik : musiciens et danseurs K-pop dans la rue, bars, karaokes, clubs.',
+        tips: "Depuis Seoul Forest : metro ligne 2 direct, Seongsu -> Hongik Univ. (~30 min), sortie 9 pour la rue pietonne. Depuis l'Airbnb : ~8 km, 10-15 min a pied jusqu'a Dongdaemun History & Culture Park puis ligne 2 direct (9 arrets, ~20 min), ~35-40 min porte a porte, ~1 500 wons/pers en T-money. Retour : dernier metro ligne 2 vers minuit (a verifier), sinon taxi ~20-25 min, ~15 000-20 000 wons a 3 (majoration de nuit apres 22h).",
+        tags: ['Food', 'Culture'],
+        type: 'nightlife', date: '2026-10-05', time: '19:30', isPhotoSpot: true
+      },
       // ===============================================
       // ===== COREE DU SUD - SUWON =====
       // ===============================================

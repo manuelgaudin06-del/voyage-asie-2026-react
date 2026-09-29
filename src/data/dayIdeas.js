@@ -90,9 +90,6 @@ const RAW = [
   ['2026-10-05', '19:00', 'Seoul', 'park', 'Parc Ttukseom au bord du Han',
     'Quais du fleuve au coucher du soleil, locations de vélos, supérettes avec vue.',
     '1 station de Seongsu. Bières ou poulet frit livrés directement dans le parc, c\'est la tradition.'],
-  ['2026-10-05', '21:00', 'Seoul', 'nightlife', 'Hongdae (musiciens de rue)',
-    'Quartier étudiant : busking, danseurs de K-pop dans la rue, bars et karaokés.',
-    'Plus loin (ligne 2), à garder si vous avez encore de l\'énergie.'],
 
   // mar. 06/10 — Suwon
   ['2026-10-06', '11:30', 'Suwon', 'transport', 'Petit train Hwaseong Eocha',
