@@ -430,30 +430,30 @@ const RAW = [
     'Les rues d\'époque Edo, désertes et éclairées par les lanternes.',
     'Pose longue, on a la rue pour soi.'],
 
-  // sam. 31/10 — Shirakawa-go
-  ['2026-10-31', '12:30', 'Shirakawa-go', 'restaurant', 'Déjeuner au feu de bois (irori)',
-    'Soba, truite grillée et plats de montagne autour d\'un foyer traditionnel.',
-    'Plusieurs restos dans des maisons gassho.'],
-  ['2026-10-31', '13:30', 'Shirakawa-go', 'temple', 'Temple Myozen-ji',
-    'Temple et ancienne demeure au toit de chaume, grands volumes de bois sombre.',
-    'Au centre du village, tarif modeste.'],
-  ['2026-10-31', '19:30', 'Takayama', 'nightlife', 'Izakaya à Takayama',
-    'Sake local et spécialités de montagne dans une petite salle de bois.',
-    'Retour de Shirakawa-go en fin d\'après-midi.'],
-
-  // dim. 01/11 — Takayama
-  ['2026-11-01', '08:00', 'Takayama', 'market', 'Marché matinal du Jinya',
+  // sam. 31/10 — Takayama
+  ['2026-10-31', '08:00', 'Takayama', 'market', 'Marché matinal du Jinya',
     'Deuxième marché du matin, plus petit, devant l\'ancien bureau du gouverneur.',
     'Juste après Miyagawa, 5 min à pied.'],
-  ['2026-11-01', '12:30', 'Takayama', 'cultural', 'Takayama Jinya',
+  ['2026-10-31', '12:30', 'Takayama', 'cultural', 'Takayama Jinya',
     'Ancien bureau du gouvernement shogunal : salles de tatami, magasin à riz, salle d\'interrogatoire.',
     'Ouvert tous les jours.'],
-  ['2026-11-01', '13:15', 'Takayama', 'museum', 'Salle des chars (Yatai Kaikan)',
+  ['2026-10-31', '13:15', 'Takayama', 'museum', 'Salle des chars (Yatai Kaikan)',
     'Les chars géants du festival de Takayama, exposés toute l\'année.',
     'Juste avant les brasseries de sake.'],
-  ['2026-11-01', '15:30', 'Takayama', 'restaurant', 'Mitarashi dango',
+  ['2026-10-31', '15:30', 'Takayama', 'restaurant', 'Mitarashi dango',
     'Brochettes de boules de riz grillées à la sauce soja, version salée typique de Takayama.',
     'Snack sur la route des temples Higashiyama.'],
+
+  // dim. 01/11 — Shirakawa-go + Ainokura (excursion Nohi)
+  ['2026-11-01', '12:30', 'Shirakawa-go', 'restaurant', 'Déjeuner au feu de bois (irori)',
+    'Soba, truite grillée et plats de montagne autour d\'un foyer traditionnel.',
+    'Plusieurs restos dans des maisons gassho.'],
+  ['2026-11-01', '13:30', 'Shirakawa-go', 'temple', 'Temple Myozen-ji',
+    'Temple et ancienne demeure au toit de chaume, grands volumes de bois sombre.',
+    'Au centre du village, tarif modeste.'],
+  ['2026-11-01', '19:30', 'Takayama', 'nightlife', 'Izakaya à Takayama',
+    'Sake local et spécialités de montagne dans une petite salle de bois.',
+    'Retour de l\'excursion à 15h50.'],
 
   // lun. 02/11 — Nagoya
   ['2026-11-02', '15:30', 'Nagoya', 'temple', 'Osu Kannon',
