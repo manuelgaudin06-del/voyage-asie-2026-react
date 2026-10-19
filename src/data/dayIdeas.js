@@ -419,14 +419,14 @@ const RAW = [
     'Téléphérique jusqu\'au mont Tenjo : vue sur le lac et le Fuji.',
     'À placer selon la météo : les nuages montent souvent l\'après-midi.'],
 
-  // ven. 30/10 — Takayama (arrivée ~16h)
-  ['2026-10-30', '16:45', 'Takayama', 'restaurant', 'Sushi de bœuf de Hida',
+  // ven. 30/10 — Matsumoto puis Takayama (arrivée 20h18)
+  ['2026-10-31', '11:45', 'Takayama', 'restaurant', 'Sushi de bœuf de Hida',
     'Bœuf de Hida mi-cuit sur riz, servi sur une galette de riz en guise d\'assiette, dans Sanmachi.',
     'Snack culte. Dépêchez-vous : la plupart des boutiques ferment vers 17h.'],
-  ['2026-10-30', '19:00', 'Takayama', 'restaurant', 'Dîner bœuf de Hida',
+  ['2026-10-30', '20:45', 'Takayama', 'restaurant', 'Dîner bœuf de Hida',
     'Bœuf de Hida grillé sur feuille de magnolia (hoba-miso) ou en yakiniku.',
-    'Réserver si possible, les bonnes adresses sont petites.'],
-  ['2026-10-30', '21:00', 'Takayama', 'photo', 'Sanmachi de nuit',
+    'Arrivée 20h18 : réserver un resto qui sert encore après 20h30.'],
+  ['2026-10-30', '22:00', 'Takayama', 'photo', 'Sanmachi de nuit',
     'Les rues d\'époque Edo, désertes et éclairées par les lanternes.',
     'Pose longue, on a la rue pour soi.'],
 

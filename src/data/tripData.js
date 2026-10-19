@@ -1086,9 +1086,9 @@ export const PLACES = [
         rating: 4.6, ratingCount: 15000,
         photo: null,
         desc: 'Ruelles Edo, maisons bois, brasseries de sake.',
-        tips: "Vous arrivez tard : Kawaguchiko-Takayama prend ~7h (bus jusqu a Kofu, train jusqu a Matsumoto, puis bus Nohi 2h30). Les brasseries de sake affichent une boule de cedre (sugidama) au-dessus de la porte.",
+        tips: "Les brasseries de sake affichent une boule de cedre (sugidama) au-dessus de la porte.",
         tags: ['Culture', 'Photo', 'Incontournable'],
-        type: 'cultural', date: '2026-10-30', time: "16:30", isPhotoSpot: true
+        type: 'cultural', date: '2026-10-31', time: "12:30", isPhotoSpot: true
       },
       {
         id: 5303, country: 'japan', city: 'Takayama', name: 'Temples Higashiyama',
@@ -1108,7 +1108,7 @@ export const PLACES = [
         desc: 'Reflets automne golden hour sur la riviere.',
         tips: 'Golden hour pour les reflets automnaux.',
         tags: ['Nature', 'Photo'],
-        type: 'nature', date: '2026-10-30', time: "17:30", isPhotoSpot: true
+        type: 'nature', date: '2026-10-31', time: "17:30", isPhotoSpot: true
       },
       {
         id: 5305, country: 'japan', city: 'Takayama', name: 'Hida no Sato',
@@ -1129,6 +1129,16 @@ export const PLACES = [
         tips: "Les sakagura sont signalées par une boule de cèdre (sugidama) au-dessus de la porte.",
         tags: ['Food', 'Culture', 'Activité'],
         type: 'activity', date: '2026-10-31', time: '14:00', isPhotoSpot: false
+      },
+      {
+        id: 5307, country: 'japan', city: 'Takayama', name: 'Chateau de Matsumoto',
+        lat: 36.2380, lng: 137.9690,
+        rating: 4.6, ratingCount: 30000,
+        photo: null,
+        desc: "Le « chateau du corbeau » : donjon noir d'origine (XVIe siecle), reflet dans les douves avec les Alpes derriere.",
+        tips: "Etape du 30/10 entre Kawaguchiko et Takayama : valises en consigne gare de Matsumoto, 15 min a pied. ~700 yens. Rues Nakamachi et Nawate a cote. Bus Nohi RESERVE a 17h45 (terminal devant la gare) -> Takayama 20h18.",
+        tags: ['Chateau', 'Photo', 'Incontournable'],
+        type: 'palace', date: '2026-10-30', time: "13:00", isPhotoSpot: true
       },
       // ===============================================
       // ===== JAPON - SHIRAKAWA-GO =====
@@ -1192,7 +1202,7 @@ export const PLACES = [
         rating: 4.3, ratingCount: 5000,
         photo: null,
         desc: 'Carpes koi dans eaux cristallines, pierres moussues.',
-        tips: "Le bus de Nagoya met ~1h34 : impossible d'y etre a 9h. Le 3 novembre est FERIE au Japon (fete de la Culture) : bus en horaires de week-end et site frequente.",
+        tips: "Bus Gifu Bus RESERVE (A/R) : Nagoya Meitetsu Bus Center 8h40 -> Gujo Jokamachi Plaza 10h15 ; retour 16h10 -> Nagoya 18h05. Le 3 novembre est FERIE au Japon (fete de la Culture) : bus en horaires de week-end et site frequente.",
         tags: ['Excursion', 'Nature', 'Photo'],
         type: 'nature', date: '2026-11-03', time: "10:30", isPhotoSpot: true
       },
@@ -1222,7 +1232,7 @@ export const PLACES = [
         rating: 4.3, ratingCount: 2500,
         photo: null,
         desc: "Canal d'irrigation bordé de fleurs où nagent des carpes koi, en plein cœur de Gujo.",
-        tips: "Excursion. La plus jolie ruelle d'eau de Gujo. Retour Nagoya l'après-midi (rue Osu le soir).",
+        tips: "Excursion. La plus jolie ruelle d'eau de Gujo. Bus retour reserve a 16h10 depuis Jokamachi Plaza (arrivee Nagoya 18h05, rue Osu le soir).",
         tags: ['Excursion', 'Photo', 'Culture'],
         type: 'photo', date: '2026-11-03', time: "14:00", isPhotoSpot: true
       },
@@ -1922,9 +1932,9 @@ export const PLACES = [
         rating: null, ratingCount: 0,
         photo: null,
         desc: "3 nuits (30/10 au 02/11), ~300 EUR. Appart entier au bord de la Miyagawa, pres de la vieille ville.",
-        tips: "",
+        tips: "Arrivee ~20h30 (bus Nohi 20h18 + 15 min a pied) : verifier que l'arrivee tardive / autonome est possible.",
         tags: ['Hotel'],
-        type: 'hotel', date: '2026-10-30', time: '15:00', isPhotoSpot: false
+        type: 'hotel', date: '2026-10-30', time: '20:30', isPhotoSpot: false
       },
       {
         id: 8008, country: 'japan', city: 'Nagoya', name: 'Airbnb - Marunouchi',
@@ -2061,7 +2071,7 @@ export const TRANSPORT_LEGS = [
       { date: '2026-10-13', from: 'Busan',       to: 'Chiba',       mode: 'plane',  duration: '2h15',  note: 'Vol KE2129 Gimhae \u2192 Narita 11:35, puis train vers Chiba' },
       { date: '2026-10-15', from: 'Chiba',       to: 'Tokyo',       mode: 'train',  duration: '40min', note: 'Ligne Sobu vers Okachimachi' },
       { date: '2026-10-28', from: 'Tokyo',       to: 'Kawaguchiko', mode: 'train',  duration: '2h',    note: 'Train via Otsuki' },
-      { date: '2026-10-30', from: 'Kawaguchiko', to: 'Takayama',    mode: 'train',  duration: '4h30',  note: 'Train + bus via Matsumoto' },
+      { date: '2026-10-30', from: 'Kawaguchiko', to: 'Takayama',    mode: 'bus',    duration: '~2h30', note: 'Train jusqu a Matsumoto (visite du chateau), puis bus Nohi reserve 17h45 -> 20h18' },
       { date: '2026-11-02', from: 'Takayama',    to: 'Nagoya',      mode: 'train',  duration: '2h15',  note: 'Ltd Exp Hida' },
       { date: '2026-11-04', from: 'Nagoya',      to: 'Kyoto',       mode: 'train',  duration: '35min', note: 'Shinkansen Nozomi' },
       { date: '2026-11-08', from: 'Kyoto',       to: 'Nara',        mode: 'train',  duration: '45min', note: 'JR Nara Line' },
@@ -2114,11 +2124,11 @@ export const DAILY_PHOTO_TIPS = {
       '2026-10-27': "Senso-ji a 5h30 : temple desert, lumiere douce. IBIS + f/2.8 suffisent.",
       '2026-10-28': "Transfert Tokyo vers Kawaguchiko (checkout 10h). A la gare, acheter le pass bus retro 2 jours (2 000 yens, guichet Fujikyu, valable 28 + 29) : foret d'Aokigahara l'apres-midi, puis onsen. Le Fuji, c'est demain matin.",
       '2026-10-29': "Chureito a 6h30 pour le sunrise (398 marches), Oishi Park ensuite. Fuji degage ~60% des matins en octobre. Pass bus 2 jours (2 000 yens) achete la veille : couvre Oishi, Saiko et Shoji, pas Oshino Hakkai ni Chureito (train).",
-      '2026-10-30': "Takayama : vieille ville Edo, riviere Miyagawa a la golden hour. 35mm ideal pour les ruelles.",
+      '2026-10-30': "Matsumoto : le chateau noir dans les douves, Alpes en fond. Arrivee Takayama 20h18 (bus Nohi).",
       '2026-10-31': "Jour libre Takayama : marche matinal Miyagawa, Hida no Sato (fermes gassho) et brasseries de sake.",
       '2026-11-01': "Shirakawa-go + Ainokura (excursion Nohi 8h30-15h50) : PIC des couleurs, observatoire Tenshukaku = LE point de vue.",
       '2026-11-02': "Lundi : musees fermes. Chateau a l'arrivee, rue Osu ensuite, Oasis 21 a la blue hour (reflets multiples, grand angle 18mm).",
-      '2026-11-03': "Excursion Gujo Hachiman (1h34 de bus, ferie au Japon) : canaux, Igawa Komichi, chateau. Polarisant obligatoire.",
+      '2026-11-03': "Excursion Gujo Hachiman (bus reserve 8h40 -> 10h15, retour 16h10, ferie au Japon) : canaux, Igawa Komichi, chateau. Polarisant obligatoire.",
       '2026-11-04': "Atsuta a 8h, musee Toyota a 9h30 (sacs en consigne gare de Nagoya), Shinkansen vers 12h15. Kiyomizu-dera l'apres-midi, ruelles de Ninenzaka, puis Gion au crepuscule.",
       '2026-11-05': "Bambouseraie avant 8h = personne. 18mm vertical. Kinkaku-ji : soleil SO l'apres-midi.",
       '2026-11-06': "Nanzen-ji : l'aqueduc de brique et ses arches se photographient toute l'annee, sans attendre les erables.",
