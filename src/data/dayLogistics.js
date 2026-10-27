@@ -1,4 +1,5 @@
 // Infos pratiques jour par jour, affichées en tête de chaque journée dans l'onglet Guide.
+// Couvre le 28/10 → 13/11 (Fuji, Alpes japonaises, Nagoya, Kyoto, Nara, Osaka).
 // Source : carnet de route (voyage-asie-2026/CLAUDE.md) + réservations. Seul l'onglet Guide les lit,
 // pas besoin de les synchroniser avec program.html.
 // Chaque clé de section est optionnelle ; chaque entrée est une ligne de texte.
@@ -215,6 +216,233 @@ export const DAY_LOGISTICS = {
     ],
     attention: [
       'Fushimi Inari n\'est PAS aujourd\'hui : il a été déplacé au 07/11.',
+    ],
+  },
+
+  '2026-11-05': {
+    resume: 'Arashiyama à l\'aube (bambous, Tenryu-ji), puis Kinkaku-ji l\'après-midi.',
+    trajets: [
+      'À Kyoto, Suica/ICOCA marche partout (métro, bus, JR). Les bus de ville sont lents et bondés : préférer métro + JR, ou taxi à 3 sur les petites distances.',
+      '~6h30 : gare JR de Nijo (à ~10 min à pied de la maison) → Saga-Arashiyama par la ligne JR Sagano, ~15 min, ~240 ¥.',
+      'Arashiyama → Kinkaku-ji : bus ou taxi à 3 (~25 min). Ryoan-ji est à ~20 min à pied de Kinkaku-ji.',
+    ],
+    billets: [
+      'Rien à réserver.',
+    ],
+    logement: [
+      'Maison Nijo / Karasuma-Oike (2e nuit). 6 min du marché Nishiki, 7 min du château de Nijo.',
+    ],
+    faire: [
+      'Être à la bambouseraie AVANT 8h : après, c\'est la foule.',
+      'Kinkaku-ji vers 14h-15h pour le soleil sur le pavillon.',
+    ],
+    budget: [
+      'JR ~240 ¥ · jardin de Tenryu-ji ~500 ¥ · villa Okochi (option) ~1 000 ¥ · parc aux singes (option) ~800 ¥ · Kinkaku-ji 500 ¥ · Ryoan-ji ~600 ¥ · taxi partagé ~800 ¥/pers.',
+    ],
+    attention: [
+      'Érables encore verts : le pic à Kyoto est attendu vers le 11 décembre.',
+      'Plan B pluie : musée du chemin de fer de Kyoto (fermé le mercredi, jeudi OK).',
+    ],
+  },
+
+  '2026-11-06': {
+    resume: 'Les collines de l\'Est : chemin de la Philosophie, Ginkaku-ji, Nanzen-ji, Gion le soir.',
+    trajets: [
+      'Ginkaku-ji / chemin de la Philosophie : bus ou taxi depuis la maison (~20 min).',
+      'Le chemin descend à pied vers Nanzen-ji (~30 min de marche). Retour : métro ligne Tozai depuis Keage, direct jusqu\'à Karasuma-Oike.',
+      'Gion le soir : métro Tozai jusqu\'à Sanjo-Keihan, puis à pied.',
+    ],
+    billets: [
+      'Rien à réserver.',
+    ],
+    logement: [
+      'Maison Nijo / Karasuma-Oike (3e nuit).',
+    ],
+    faire: [
+      'Commencer tôt (7h) pour avoir le chemin de la Philosophie au calme.',
+    ],
+    budget: [
+      'Ginkaku-ji 500 ¥ · Nanzen-ji : enceinte et aqueduc gratuits, Sanmon / Tenjuan quelques centaines de ¥ · Eikan-do jusqu\'à 1 500 ¥ (à zapper, encore vert) · jardin du sanctuaire Heian ~600 ¥.',
+    ],
+    attention: [
+      'Eikan-do : tarif d\'automne déjà en place mais érables encore verts, à éviter si le budget compte.',
+      'Gion : ne pas photographier les geishas de près ni les suivre, certaines ruelles privées sont interdites aux photos.',
+    ],
+  },
+
+  '2026-11-07': {
+    resume: 'Fushimi Inari au lever du jour, Tofuku-ji, château de Nijo, Nishiki. Samedi : monde partout.',
+    trajets: [
+      '5h30 à Fushimi Inari : les premiers trains arrivent trop tard depuis la maison, prendre un taxi à 3 (~15-20 min, ~2 500-3 000 ¥ au total).',
+      'Fushimi Inari → Tofuku-ji : 1 station sur la ligne JR Nara (ou ~20 min à pied).',
+      'Retour vers le centre : JR jusqu\'à Kyoto puis métro Karasuma, ou taxi. Château de Nijo à 7 min à pied de la maison.',
+    ],
+    billets: [
+      'Rien à réserver.',
+    ],
+    logement: [
+      'Maison Nijo / Karasuma-Oike (4e et dernière nuit).',
+    ],
+    faire: [
+      'Réserver le taxi la veille (appli GO ou demander à un taxi en station), ou repérer la station de taxis la plus proche.',
+      'Le soir : préparer les sacs, départ pour Nara demain.',
+    ],
+    budget: [
+      'Taxi ~1 000 ¥/pers · Fushimi Inari gratuit · Tofuku-ji 600-1 000 ¥ · château de Nijo 1 300 ¥ · Sanjusangen-do ~600 ¥ (option) · Nishiki : snacks.',
+    ],
+    attention: [
+      'Photo INTERDITE sur le pont Tsutenkyo de Tofuku-ji en novembre : même vue depuis le pont Gaunkyo.',
+      'Tofuku-ji ouvre à 9h : prendre le petit-déjeuner entre les deux.',
+    ],
+  },
+
+  '2026-11-08': {
+    resume: 'Kyoto → Nara, Todai-ji et Kasuga Taisha l\'après-midi. Dimanche.',
+    trajets: [
+      'Check-out de la maison (heure à vérifier dans l\'appli Airbnb), métro Karasuma jusqu\'à la gare de Kyoto.',
+      'Kintetsu Kyoto → Kintetsu-Nara (express ~45 min, ~760 ¥ ; Limited Express plus rapide avec supplément). La guesthouse est à 5 min de Kintetsu-Nara.',
+      'Le JR Nara Line marche aussi, mais la gare JR Nara est plus loin de la guesthouse : préférer Kintetsu.',
+      'À Nara, tout se fait à pied : Todai-ji ~15 min, Kasuga Taisha ~20 min de la gare.',
+    ],
+    billets: [
+      'Train : Suica/ICOCA ou billet au guichet le jour même.',
+    ],
+    logement: [
+      'Guesthouse à 5 min de Kintetsu-Nara, 1 nuit.',
+      'Consigne des bagages seulement de 10h à 13h (pas de personnel de 13h à 16h) : arriver avant 13h pour déposer les sacs.',
+    ],
+    faire: [
+      'Partir de Kyoto vers 10h-10h30 pour déposer les sacs avant 13h.',
+    ],
+    budget: [
+      'Train ~760 ¥ · Todai-ji 800 ¥ · Kasuga Taisha : enceinte gratuite, 500 ¥ la salle des lanternes · jardin Isuien (option, tarif à vérifier).',
+    ],
+    attention: [
+      'Les cerfs mordillent et poussent dès qu\'ils voient des biscuits : ne pas les sortir tant qu\'on n\'est pas prêt.',
+      'Nara se vide le soir : dîner tôt, beaucoup de restos ferment vers 20h.',
+    ],
+  },
+
+  '2026-11-09': {
+    resume: 'Cerfs de Nara à l\'aube, puis Osaka : château, Shinsekai, Umeda Sky au coucher du soleil, Dotonbori.',
+    trajets: [
+      '6h30 : parc de Nara à pied depuis la guesthouse.',
+      'Kintetsu-Nara → Osaka-Namba / Nippombashi (~40 min, ~680 ¥). De Nippombashi, 1 station de métro Sakaisuji jusqu\'à Nagahoribashi, ou ~12 min à pied.',
+      'Dans Osaka : métro (Suica/ICOCA). Château : station Tanimachi 4-chome. Shinsekai : Ebisucho. Umeda : Umeda/Osaka.',
+    ],
+    billets: [
+      'Rien à réserver (Umeda Sky : billet sur place).',
+    ],
+    logement: [
+      'TsuruINN Shinsaibashi, 4 nuits (09 → 13/11). 7 min à pied de la station Nagahoribashi ; Dotonbori et Shinsaibashi à 10-17 min à pied.',
+      'Arrivée vers midi : demander à l\'hôte si on peut déposer les sacs, sinon consignes de la gare de Namba.',
+    ],
+    faire: [
+      'Écrire à l\'hôte d\'Osaka pour le dépôt de bagages avant l\'heure d\'arrivée.',
+    ],
+    budget: [
+      'Train ~680 ¥ · château d\'Osaka : parc gratuit, donjon ~600 ¥ (tarif à vérifier) · tour Tsutenkaku ~1 000 ¥ (option) · Umeda Sky 2 000 ¥ · métro ~240 ¥ le trajet.',
+    ],
+    attention: [
+      'Coucher du soleil vers 17h : être en haut d\'Umeda Sky vers 16h30.',
+      'Feuillages d\'automne à Osaka attendus début décembre seulement.',
+    ],
+  },
+
+  '2026-11-10': {
+    resume: 'Osaka sud : Sumiyoshi Taisha, Namba Yasaka, Kuromon, Amerikamura, Abeno Harukas le soir.',
+    trajets: [
+      'Sumiyoshi Taisha : tram Hankai ou train Nankai depuis Namba (~20 min).',
+      'Namba Yasaka, Kuromon, Amerikamura, Den Den Town : tout à pied ou 1-2 stations autour de Namba.',
+      'Abeno Harukas : métro jusqu\'à Tennoji.',
+    ],
+    billets: [
+      'Rien à réserver.',
+    ],
+    logement: [
+      'TsuruINN Shinsaibashi (2e nuit).',
+    ],
+    faire: [
+      'Kuromon le matin pour les produits frais, avant la foule du midi.',
+    ],
+    budget: [
+      'Transports ~500 ¥ · Sumiyoshi et Namba Yasaka gratuits · Abeno Harukas 300 ~2 000 ¥ · Spa World (option) ~1 500-2 000 ¥ · okonomiyaki ~1 500 ¥.',
+    ],
+    attention: [
+      'Spa World : tatouages interdits.',
+    ],
+  },
+
+  '2026-11-11': {
+    resume: 'Parc de Minoo (cascade, gorge, momiji tempura), Hozenji Yokocho et Nakanoshima le soir.',
+    trajets: [
+      'Métro Midosuji jusqu\'à Umeda, puis Hankyu jusqu\'à Minoo (changement à Ishibashi-handaimae), ~30-40 min, ~300 ¥.',
+      'Gare de Minoo → cascade : 2,8 km de marche facile le long de la rivière (~45 min).',
+    ],
+    billets: [
+      'Rien à réserver.',
+    ],
+    logement: [
+      'TsuruINN Shinsaibashi (3e nuit).',
+    ],
+    faire: [
+      'Bonnes chaussures : chemin parfois humide.',
+    ],
+    budget: [
+      'Transports ~600 ¥ A/R · parc gratuit · momiji tempura quelques centaines de ¥ · temple Katsuo-ji (option) ~400 ¥.',
+    ],
+    attention: [
+      'Plan B pluie : aquarium Kaiyukan (ouvert tous les jours).',
+      'Érables de Minoo encore verts (pic vers le 4 décembre).',
+    ],
+  },
+
+  '2026-11-12': {
+    resume: 'Jour libre : Universal Studios, château de Himeji, ou Kobe.',
+    trajets: [
+      'Universal Studios : métro + JR jusqu\'à Universal City (~30 min).',
+      'Himeji : JR Special Rapid depuis Osaka (~1h, ~1 500 ¥) ou Shinkansen depuis Shin-Osaka (~30 min, plus cher).',
+      'Kobe : JR depuis Osaka (~25 min, ~420 ¥).',
+    ],
+    billets: [
+      'Universal Studios : billets à acheter EN LIGNE à l\'avance (billet daté, et Express Pass si on veut éviter les files).',
+    ],
+    logement: [
+      'TsuruINN Shinsaibashi (4e et dernière nuit).',
+    ],
+    faire: [
+      'Choisir l\'option la veille au plus tard (USJ = billets à prendre avant).',
+      'Le soir : faire les sacs, vérifier le vol du lendemain (Thai Airways, KIX 17h25).',
+    ],
+    budget: [
+      'USJ ~9 000-11 000 ¥ (+ Express Pass) · Himeji ~1 500 ¥ de train + château ~2 500 ¥ (tarif à vérifier) · Kobe ~840 ¥ A/R + bœuf de Kobe 5 000 ¥ et plus.',
+    ],
+    attention: [
+      'USJ un jeudi de novembre : moins de monde qu\'un week-end, mais les files restent longues sans Express Pass.',
+    ],
+  },
+
+  '2026-11-13': {
+    resume: 'Dernière matinée à Osaka, puis vol KIX 17h25 → Bangkok (arrivée 22h).',
+    trajets: [
+      'Nagahoribashi → Namba (1-2 stations), puis train Nankai jusqu\'à l\'aéroport du Kansai (KIX) : ~40-45 min, ~970 ¥ (Rapi:t plus confortable, avec supplément).',
+      'Viser l\'aéroport vers 14h30 (vol international) : quitter l\'appartement vers 13h-13h30.',
+    ],
+    billets: [
+      'Vol Thai Airways KIX 17h25 → Bangkok 22h00 : faire l\'enregistrement en ligne la veille.',
+    ],
+    logement: [
+      'Check-out du TsuruINN le matin (heure à vérifier), bagages en consigne à Namba si on se promène encore.',
+    ],
+    faire: [
+      'Dépenser ou garder les derniers yens, vider la Suica (le solde peut servir à l\'aéroport).',
+      'Rinku Premium Outlets (option) : à Rinku Town, une station avant l\'aéroport.',
+    ],
+    budget: [
+      'Train ~970 ¥ · dernier kaiten-zushi ~1 500-2 000 ¥.',
+    ],
+    attention: [
+      'Ne pas se faire piéger par les achats à Rinku : garder une marge pour l\'enregistrement et la sécurité.',
     ],
   },
 };
