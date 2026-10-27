@@ -807,6 +807,54 @@ button {
   font-weight: 700;
 }
 
+/* Infos pratiques (DAY_LOGISTICS) : trajets, billets, logement… en tête de journée */
+.day-logistics {
+  margin: 0 0 16px;
+}
+
+.day-logistics__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 10px;
+}
+
+.day-logistics__section {
+  min-width: 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: rgba(255, 251, 242, 0.72);
+  border: 1px solid rgba(176, 122, 68, 0.2);
+  overflow-wrap: anywhere;
+}
+
+.day-logistics__section--attention {
+  background: rgba(250, 232, 220, 0.8);
+  border-color: rgba(176, 90, 60, 0.3);
+}
+
+.day-logistics__section--faire {
+  background: rgba(228, 240, 226, 0.8);
+  border-color: rgba(90, 130, 80, 0.3);
+}
+
+.day-logistics__section h4 {
+  margin: 0 0 6px;
+  color: var(--ink);
+  font-size: 0.95rem;
+}
+
+.day-logistics__section ul {
+  margin: 0;
+  padding-left: 18px;
+  color: #405157;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.day-logistics__section li + li {
+  margin-top: 4px;
+}
+
 /* Idées en plus (DAY_IDEAS) : cartes compactes sans photo, sous le programme du jour */
 .idea-block {
   margin-top: 18px;

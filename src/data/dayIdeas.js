@@ -407,9 +407,9 @@ const RAW = [
   ['2026-10-28', '13:00', 'Kawaguchiko', 'restaurant', 'Hoto Fudo (houtou)',
     'Nouilles épaisses mijotées avec potiron et légumes en marmite, spécialité du Fuji.',
     'À faire le premier midi en arrivant.'],
-  ['2026-10-28', '20:00', 'Kawaguchiko', 'nature', 'Illuminations du couloir des érables',
-    'Le Momiji Kairo est souvent éclairé le soir pendant le festival des feuilles d\'automne.',
-    'Dates du festival à vérifier (habituellement fin oct. → fin nov.).'],
+  ['2026-10-28', '20:00', 'Kawaguchiko', 'nature', 'Balade du soir au bord du lac',
+    'Le lac Kawaguchi de nuit, avec les lumières des hôtels qui se reflètent dans l\'eau.',
+    'Pas d\'illuminations du Momiji Kairo ce soir : le festival va du 7 au 29/11.'],
 
   // jeu. 29/10 — Fuji
   ['2026-10-29', '07:30', 'Kawaguchiko', 'photo', 'Le « Lawson du Fuji »',

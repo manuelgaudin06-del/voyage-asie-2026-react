@@ -24,6 +24,7 @@ import {
   TYPE_PHOTO_FALLBACK,
 } from './data/tripData';
 import { DAY_IDEAS } from './data/dayIdeas';
+import { DAY_LOGISTICS } from './data/dayLogistics';
 
 // Préfixe d'URL du site (= base Vite, ex. '/voyage-asie-2026-react/'). Sert pour tous
 // les fichiers de public/ référencés par une chaîne (photos, icônes, iframe, fonds).
@@ -428,7 +429,7 @@ function GuidePage({ places, ideas }) {
 
   return (
     <div className="page-grid guide-page">
-      <PageHeader eyebrow="Guide" title="Guide détaillé" subtitle="Le programme, et des idées en plus pour chaque jour" />
+      <PageHeader eyebrow="Guide" title="Guide détaillé" subtitle="Infos pratiques, programme et idées en plus pour chaque jour" />
       <section className="stack">
         {dates.map((date) => (
           <article className="guide-day" key={date}>
@@ -437,6 +438,7 @@ function GuidePage({ places, ideas }) {
               <h2>{formatDateLong(date)}</h2>
             </header>
             {DAILY_PHOTO_TIPS[date] && <p className="date-tip"><img className="inline-icon" src={cameraIcon} alt="" /> {DAILY_PHOTO_TIPS[date]}</p>}
+            {DAY_LOGISTICS[date] && <DayLogistics info={DAY_LOGISTICS[date]} />}
             {byDate[date] && (
               <div className="card-grid">
                 {sortByTime(byDate[date]).map((place) => (
@@ -457,6 +459,35 @@ function GuidePage({ places, ideas }) {
           </article>
         ))}
       </section>
+    </div>
+  );
+}
+
+const LOGISTICS_SECTIONS = [
+  ['trajets', '🚆 Trajets'],
+  ['billets', '🎫 Billets et réservations'],
+  ['logement', '🏠 Logement'],
+  ['faire', '✅ À faire'],
+  ['budget', '💴 Budget par personne'],
+  ['attention', '⚠️ Attention'],
+];
+
+function DayLogistics({ info }) {
+  return (
+    <div className="day-logistics">
+      <h3 className="idea-block__title">📋 Infos pratiques {info.resume && <small>{info.resume}</small>}</h3>
+      <div className="day-logistics__grid">
+        {LOGISTICS_SECTIONS.filter(([key]) => info[key]?.length).map(([key, label]) => (
+          <section className={`day-logistics__section day-logistics__section--${key}`} key={key}>
+            <h4>{label}</h4>
+            <ul>
+              {info[key].map((line) => (
+                <li key={line}>{line}</li>
+              ))}
+            </ul>
+          </section>
+        ))}
+      </div>
     </div>
   );
 }
