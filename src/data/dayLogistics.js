@@ -128,7 +128,7 @@ export const DAY_LOGISTICS = {
     ],
     billets: [
       '✅ Excursion payée (27 000 ¥ pour 3), résa Japan Bus Online n° 10192007362 au nom de GAUDIN MANUEL.',
-      '✅ Billet imprimé : le montrer au guichet Nohi au moins 10 min avant le départ, on reçoit en échange la carte d'embarquement (bus + places).',
+      '✅ Billet imprimé : le montrer au guichet Nohi au moins 10 min avant le départ, on reçoit en échange la carte d\'embarquement (bus + places).',
       'Entrée Minkaen + navette de l\'observatoire de Shiroyama incluses.',
     ],
     logement: [
