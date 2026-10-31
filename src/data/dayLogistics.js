@@ -123,12 +123,12 @@ export const DAY_LOGISTICS = {
   '2026-11-01': {
     resume: 'Excursion organisée Ainokura + Shirakawa-go (villages aux toits de chaume).',
     trajets: [
-      '8h10 : guichet Nohi de la gare routière de Takayama (à côté de la gare JR). Départ 8h30, quai indiqué au guichet.',
+      '8h10 : guichet Nohi de la gare routière de Takayama (à côté de la gare JR). Départ 8h30, quai 7.',
       'Ainokura le matin, Shirakawa-go jusqu\'à 15h, retour Takayama 15h50.',
     ],
     billets: [
       '✅ Excursion payée (27 000 ¥ pour 3), résa Japan Bus Online n° 10192007362 au nom de GAUDIN MANUEL.',
-      'Le vrai billet = le mail Japan Bus Online, à échanger au guichet au moins 10 min avant le départ.',
+      '✅ Billet imprimé : le montrer au guichet Nohi au moins 10 min avant le départ, on reçoit en échange la carte d'embarquement (bus + places).',
       'Entrée Minkaen + navette de l\'observatoire de Shiroyama incluses.',
     ],
     logement: [

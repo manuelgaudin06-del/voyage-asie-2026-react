@@ -1149,7 +1149,7 @@ export const PLACES = [
         rating: 4.7, ratingCount: 20000,
         photo: null,
         desc: 'Maisons Gassho-zukuri UNESCO, toits de chaume.',
-        tips: "Shirakawa-go est le second bon moment du voyage pour les couleurs : le pic y est annonce fin octobre en 2026. Excursion Nohi Shirakawa-go + Ainokura (dim. 01/11) : depart gare routiere de Takayama 8h30 (quai 7, echanger le billet au guichet 15 min avant), Ainokura d'abord, Shirakawa-go jusqu'a 15h, retour Takayama 15h50. Entree Minkaen + navette observatoire incluses.",
+        tips: "Shirakawa-go est le second bon moment du voyage pour les couleurs : le pic y est annonce fin octobre en 2026. Excursion Nohi Shirakawa-go + Ainokura (dim. 01/11) : depart gare routiere de Takayama 8h30 (quai 7, billet imprime a echanger au guichet Nohi vers 8h10, au moins 10 min avant), Ainokura d'abord, Shirakawa-go jusqu'a 15h, retour Takayama 15h50. Entree Minkaen + navette observatoire incluses.",
         tags: ['Excursion', 'Culture', 'Photo', 'Incontournable'],
         type: 'cultural', date: '2026-11-01', time: "11:30", isPhotoSpot: true
       },
@@ -2126,7 +2126,7 @@ export const DAILY_PHOTO_TIPS = {
       '2026-10-29': "Chureito a 6h30 pour le sunrise (398 marches), Oishi Park ensuite. Fuji degage ~60% des matins en octobre. Pass bus 2 jours (2 000 yens) achete la veille : couvre Oishi, Saiko et Shoji, pas Oshino Hakkai ni Chureito (train).",
       '2026-10-30': "Matsumoto : le chateau noir dans les douves, Alpes en fond. Arrivee Takayama 20h18 (bus Nohi).",
       '2026-10-31': "Jour libre Takayama : marche matinal Miyagawa, Hida no Sato (fermes gassho) et brasseries de sake.",
-      '2026-11-01': "Shirakawa-go + Ainokura (excursion Nohi 8h30-15h50) : PIC des couleurs, observatoire Tenshukaku = LE point de vue.",
+      '2026-11-01': "Shirakawa-go + Ainokura (excursion Nohi 8h30-15h50) : PIC des couleurs, observatoire Shiroyama = LE point de vue.",
       '2026-11-02': "Lundi : musees fermes. Chateau a l'arrivee, rue Osu ensuite, Oasis 21 a la blue hour (reflets multiples, grand angle 18mm).",
       '2026-11-03': "Excursion Gujo Hachiman (bus reserve 8h40 -> 10h15, retour 16h10, ferie au Japon) : canaux, Igawa Komichi, chateau. Polarisant obligatoire.",
       '2026-11-04': "Atsuta a 8h, musee Toyota a 9h30 (sacs en consigne gare de Nagoya), Shinkansen vers 12h15. Kiyomizu-dera l'apres-midi, ruelles de Ninenzaka, puis Gion au crepuscule.",
